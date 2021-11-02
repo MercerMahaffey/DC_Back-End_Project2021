@@ -1,0 +1,19 @@
+{
+  "name": "dc_back-end_project2021",
+  "version": "1.0.0",
+  "description": "Digital Crafts Back-End Project2021",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stephendoty826/DC_Back-End_Project2021.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stephendoty826/DC_Back-End_Project2021/issues"
+  },
+  "homepage": "https://github.com/stephendoty826/DC_Back-End_Project2021#readme"
+}
