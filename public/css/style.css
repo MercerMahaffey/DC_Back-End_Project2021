@@ -15993,10 +15993,10 @@ select.sort {
   transform: scale(1.1);
 }
 
-.animation-spin {
+/* .animation-spin {
   -webkit-animation: fa-spin 2s infinite linear;
   animation: fa-spin 2s infinite linear;
-}
+} */
 
 @-webkit-keyframes fa-spin {
   0% {
