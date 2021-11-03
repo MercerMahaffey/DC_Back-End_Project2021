@@ -28,6 +28,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
 @import "./../vendor/owl-carousel/css/owl.carousel.min.css";
 @import "./../vendor/owl-carousel/css/owl.theme.default.css";
+
+/* Our Styles */
+.dolphine{
+  padding-left: 5px;
+}
+
+
+
 .preloader {
   position: fixed;
   left: 0px;
@@ -15993,10 +16001,10 @@ select.sort {
   transform: scale(1.1);
 }
 
-.animation-spin {
+/* .animation-spin {
   -webkit-animation: fa-spin 2s infinite linear;
   animation: fa-spin 2s infinite linear;
-}
+} */
 
 @-webkit-keyframes fa-spin {
   0% {
@@ -16215,6 +16223,7 @@ select.sort {
     flex-basis: auto;
   }
 
+  /* Holds entire index page */
   .main-wrapper {
     display: -webkit-box;
     display: -ms-flexbox;

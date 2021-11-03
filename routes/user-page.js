@@ -6,5 +6,4 @@ router.get('/user-page', (req, res) => {
 })
 
 
-
 module.exports = router;
