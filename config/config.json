@@ -1,9 +1,0 @@
-{
-  "development": {
-    "username": "imivbgua",
-    "password": "tvnrfkFEhriUTKNS1rHyEsnaz8m0LhqV",
-    "database": "imivbgua",
-    "host": "fanny.db.elephantsql.com",
-    "dialect": "postgres"
-  }
-}
