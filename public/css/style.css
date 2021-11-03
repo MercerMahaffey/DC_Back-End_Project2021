@@ -34,6 +34,14 @@
   padding-left: 5px;
 }
 
+.nav-push{
+  margin-left: 400px;
+}
+
+.nav-stretch{
+  width: 400px;
+}
+
 
 
 .preloader {
@@ -116,6 +124,7 @@
   visibility: visible;
   overflow: visible;
   height: 100%;
+  width: 1900px;
 }
 
 .theme-dark {
