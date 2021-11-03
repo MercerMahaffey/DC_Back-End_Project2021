@@ -19,7 +19,6 @@ cloudinary.config({
     api_secret: process.env.API_SECRET
 })
 
-
 app.get('/', (req,res) => {
     res.render('index')
 })
