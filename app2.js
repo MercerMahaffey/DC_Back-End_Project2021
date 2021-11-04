@@ -1,11 +1,9 @@
 const express = require('express');
 const app = express();
-const fileupload = require("express-fileupload")
 require("dotenv").config()
 const cloudinary = require("cloudinary").v2
-const port = process.env.PORT;
 
-app.use(fileupload())
+const port = process.env.PORT;
 
 app.use(express.static('public'))
 app.set('view engine', 'ejs')
@@ -16,11 +14,12 @@ app.use(express.json())
 cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
     api_key: process.env.API_KEY,
-    api_secret: process.env.API_SECRET
+    api_secret: process.env.API_SECRET,
+    secure: true
 })
 
 app.get('/', (req,res) => {
-    res.render('index')
+    res.render('test')
 })
 
 app.get('/upload', (req,res) => {
@@ -28,12 +27,12 @@ app.get('/upload', (req,res) => {
 })
 
 app.post("/upload", (req, res) => {
-    // const file = req.files.photo
-    console.log(files);
+    form.parse(req, (err, fields, files))
+    console.log(req.files)
 })
 
 
 
 app.listen(port, () => {
-    console.log(`On port ${port}`);
+    console.log(`Server running on port ${port}`);
 })
