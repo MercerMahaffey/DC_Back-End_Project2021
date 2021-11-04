@@ -1,7 +1,62 @@
 //in public --> js
 
-let inputPost = document.querySelector('inputCreate')
+let form = document.getElementById('postSubmit')
 
-let users = (params) => {
+//make a fetch
+
+form.addEventListener('submit', async (e) => {
+    e.preventDefault()
+
+    let newPost = {
+        title: document.querySelector('#post-title').value,
+        content: document.querySelector('#post-message').value,
+        imgurl: "imgURL"
+    }
+
+    let results = await fetch('/user_posts', {
+        method: "POST",
+        headers: { "Content-type": "application/json; charset=UTF-8" },
+        body: JSON.stringify(newPost)
+    })
+
+    // let posts = await results.json()
+    // updateStatus(posts)
+})
+
+
+
+///grab data display all messages when the page loads
+
+const displayStatus = async () => {
+
+    let results = await fetch('/user_posts');
+
+    let posts = await results.json();
+    updateStatus(posts)
+}
+
+
+
+//HTML block
+
+const updateStatus = (postsArr) => {
+    let htmlBlock = "";
+
+    postsArr.forEach((element, index) => {
+
+        //     htmlBlock +=
+        //     htmlBlock +=
+        //     htmlBlock +=
+        //     htmlBlock +=
+        //     htmlBlock +=
+    })
+
+    //attach to a dom element
 
 }
+
+
+
+
+//attach to a dom element
+

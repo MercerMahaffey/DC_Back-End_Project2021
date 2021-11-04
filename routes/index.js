@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 const db = require('../models');
+const auth = require('../auth/index');
 
-router.get('/', (req, res) => {
+router.get('/', auth, (req, res) => {
     res.render('index')
 })
 
@@ -170,7 +171,6 @@ router.put('/posts/updatetitle/:postid', async (req, res) => {
     res.json(postRecords);
 
 })
-
 /**
  *  object looks like this:
  * {

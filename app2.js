@@ -1,22 +1,14 @@
 const express = require('express');
 const app = express();
 require("dotenv").config()
-const cloudinary = require("cloudinary").v2
 
-const port = process.env.PORT;
+const port = 3010;
 
 app.use(express.static('public'))
 app.set('view engine', 'ejs')
 
 app.use(express.urlencoded({extended: false}))
 app.use(express.json())
-
-cloudinary.config({
-    cloud_name: process.env.CLOUD_NAME,
-    api_key: process.env.API_KEY,
-    api_secret: process.env.API_SECRET,
-    secure: true
-})
 
 app.get('/', (req,res) => {
     res.render('test')
