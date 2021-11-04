@@ -42,6 +42,17 @@
   width: 400px;
 }
 
+.commentSection{
+  display: flex;
+  flex-direction: column;
+}
+
+.typeCommentArea{
+  width: 1150px;
+  height: 50px;
+  border-radius: 10px;
+}
+
 
 
 .preloader {
