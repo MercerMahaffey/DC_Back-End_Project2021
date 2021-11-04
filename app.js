@@ -18,6 +18,14 @@ app.use(require('./routes/register.js'))
 app.use(require('./routes/user-page.js'))
 
 
+// let records = db.posts.findAll({include: [{
+//     model: db.users,
+//     required: true
+// }]})
+
+// records.forEach()
+
+// findAll()
 
 
 app.listen(port, () => {
