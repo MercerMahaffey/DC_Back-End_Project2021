@@ -117,7 +117,6 @@ router.post('/posts', async (req, res) => {
 
     await db.posts.create({title, content, languages, userid, imgurl})
     
-
     let postRecords = await grabPosts();
     
     res.json(postRecords);
