@@ -8,6 +8,14 @@ router.get('/', auth, (req, res) => {
     res.render('index')
 })
 
+router.get('/logout', (req, res) => {
+    
+    req.logout() // this function is added by passport, it clears the session
+
+    res.redirect('/')
+})
+
+
 /** post fetch object format
  * 
  * [
