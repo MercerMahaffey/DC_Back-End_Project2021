@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
     res.render('index')
 })
 
-/** post object format
+/** post fetch object format
  * 
  * [
  * {
@@ -81,10 +81,6 @@ let grabPosts = async () => {
 //     return postRecords;
 // }
 
-// router.post('/comments', async (req, res) => {
-    
-// })
-
 
 // grab all posts
 router.get('/posts', async (req, res) => {
@@ -138,6 +134,21 @@ router.put('/posts/updatecontent/:postid', async (req, res) => {
 
     await db.posts.update({content: newContent}, {where: {id: postid}})
 
+    let postRecords = await grabPosts();
+    
+    res.json(postRecords);
+})
+
+// deleting post
+router.delete('/posts/deletepost/:postid', async (req, res) => {
+    
+    let postid = req.params.postid;
+    
+    await db.posts.destroy({where: {id: postid}})
+
+    let postRecords = await grabPosts();
+    
+    res.json(postRecords);
 })
 
 /**
@@ -154,6 +165,30 @@ router.put('/posts/updatetitle/:postid', async (req, res) => {
 
     await db.posts.update({title: newTitle}, {where: {id: postid}})
 
+    let postRecords = await grabPosts();
+    
+    res.json(postRecords);
+
+})
+
+/**
+ *  object looks like this:
+ * {
+    "imgurl": "UpdatedImgurl"
+    }
+ */
+// updating imgurl
+router.put('/posts/updateimgurl/:postid', async (req, res) => {
+
+    let postid = req.params.postid;
+    let newImgurl = req.body.imgurl;
+
+    await db.posts.update({imgurl: newImgurl}, {where: {id: postid}})
+
+    let postRecords = await grabPosts();
+    
+    res.json(postRecords);
+
 })
 
 /**
@@ -164,7 +199,7 @@ router.put('/posts/updatetitle/:postid', async (req, res) => {
     "postid": 4
     }
  */
-
+// creating new comment
 router.post('/comments', async (req, res) => {
 
     let {content, userid, postid} = req.body;
@@ -177,5 +212,36 @@ router.post('/comments', async (req, res) => {
     res.json(postRecords);
 })
 
+/**
+ *  object looks like this:
+ * {
+    "content": "UpdatedComment"
+    }
+ */
+// updating comment
+router.put('/posts/updatecomment/:commentid', async (req, res) => {
+
+    let commentid = req.params.commentid;
+    let newContent = req.body.content;
+
+    await db.comments.update({content: newContent}, {where: {id: commentid}})
+
+    let postRecords = await grabPosts();
+    
+    res.json(postRecords);
+
+})
+
+// deleting comment
+router.delete('/posts/deletecomment/:commentid', async (req, res) => {
+    
+    let commentid = req.params.commentid;
+    
+    await db.comments.destroy({where: {id: commentid}})
+
+    let postRecords = await grabPosts();
+    
+    res.json(postRecords);
+})
 
 module.exports = router;
