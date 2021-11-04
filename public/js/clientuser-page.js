@@ -1,31 +1,62 @@
 //in public --> js
 
-let form = document.querySelector('form')
-
-form.addEventListener('submit', async (e) => {
-    e.preventDefault()
-})
+let form = document.getElementById('postSubmit')
 
 //make a fetch
 
-let newPost = {
-    title: document.querySelector('#post-title').value,
-    message: document.querySelector('#post-message').value
-}
+form.addEventListener('submit', async (e) => {
+    e.preventDefault()
 
-let results = await fetch('/', {
-    method: "POST",
+    let newPost = {
+        title: document.querySelector('#post-title').value,
+        content: document.querySelector('#post-message').value,
+        imgurl: "imgURL"
+    }
 
+    let results = await fetch('/user_posts', {
+        method: "POST",
+        headers: { "Content-type": "application/json; charset=UTF-8" },
+        body: JSON.stringify(newPost)
+    })
+
+    // let posts = await results.json()
+    // updateStatus(posts)
 })
 
-let messages = await results.json()
-updateStatus(messages)
+
+
+///grab data display all messages when the page loads
+
+const displayStatus = async () => {
+
+    let results = await fetch('/user_posts');
+
+    let posts = await results.json();
+    updateStatus(posts)
+}
 
 
 
-//grab the data all messages when the page loads
+//HTML block
+
+const updateStatus = (postsArr) => {
+    let htmlBlock = "";
+
+    postsArr.forEach((element, index) => {
+
+        //     htmlBlock +=
+        //     htmlBlock +=
+        //     htmlBlock +=
+        //     htmlBlock +=
+        //     htmlBlock +=
+    })
+
+    //attach to a dom element
+
+}
+
+
+
+
 //attach to a dom element
 
-
-//initialize post for each page
-//render all of todos from db onto page
