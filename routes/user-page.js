@@ -17,7 +17,12 @@ router.get('/users', async (req, res) => {
 router.post("/user_posts", async (req, res) => {
     // grab title, content, languages, userid, imgurl from body parser
     let {title, content, languages, userid, imgurl} = req.body
+
+    if (content){
+        
     await db.posts.create({title: title, content: content, languages: "javascript", userid: 1, imgurl: imgurl})
+    }
+
     
     // grab users posts from database sorted latest first
     let userPosts = await db.posts.findAll({
