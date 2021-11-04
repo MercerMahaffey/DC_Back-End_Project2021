@@ -19,7 +19,9 @@
   "homepage": "https://github.com/stephendoty826/DC_Back-End_Project2021#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "cloudinary": "^1.27.1",
     "cookie-session": "^1.4.0",
+    "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "helmet": "^4.6.0",
@@ -29,6 +31,5 @@
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.9.0"
   },
-  "devDependencies": {},
   "keywords": []
 }
