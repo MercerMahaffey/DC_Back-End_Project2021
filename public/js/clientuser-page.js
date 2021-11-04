@@ -1,14 +1,31 @@
 //in public --> js
 
-let createPostUser = document.querySelector('#createPostUser')
+let form = document.querySelector('form')
 
-// let users = (params) => {
-
-// }
-
-// add listener
-createPostUser.addEventListener("submit", async () => {
-    // back end is set up to create posts via json object
-    // implement front end to create post with data from "form"
-    let results = await fetch("/")
+form.addEventListener('submit', async (e) => {
+    e.preventDefault()
 })
+
+//make a fetch
+
+let newPost = {
+    title: document.querySelector('#post-title').value,
+    message: document.querySelector('#post-message').value
+}
+
+let results = await fetch('/', {
+    method: "POST",
+
+})
+
+let messages = await results.json()
+updateStatus(messages)
+
+
+
+//grab the data all messages when the page loads
+//attach to a dom element
+
+
+//initialize post for each page
+//render all of todos from db onto page
