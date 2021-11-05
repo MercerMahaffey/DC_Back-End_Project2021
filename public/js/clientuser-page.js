@@ -1,30 +1,40 @@
 //in public --> js
 
 let form = document.getElementById('postSubmit')
+let photoUpload = document.querySelector("#photoUpload") // input tag to upload photo/video
+let photoUploadLink = document.querySelector("#photoUploadLink") // anchor tag "Photo/Video"
+
 
 //make a fetch
 
-form.addEventListener('submit', async (e) => {
+// form.addEventListener('submit', async (e) => {
+//     e.preventDefault()
+
+//     let title = document.querySelector('#post-title').value
+//     let content = document.querySelector('#post-message').value
+//     const formData = new FormData()
+
+//     formData.append(title, title)
+//     formData.append(content, content)
+
+//     // let newPost = {
+//     //     title: document.querySelector('#post-title').value,
+//     //     content: document.querySelector('#post-message').value,
+//     // }
+
+//     let results = await fetch('/user_posts', {
+//         method: "POST",
+//         body: formData
+//     })
+
+//     // let posts = await results.json()
+//     // updateStatus(posts)
+// })
+
+photoUploadLink.addEventListener("click", (e) => {
     e.preventDefault()
-    // console.log('form');
-
-    let newPost = {
-        title: document.querySelector('#post-title').value,
-        content: document.querySelector('#post-message').value,
-        imgurl: "imgURL"
-    }
-
-    let results = await fetch('/user_posts', {
-        method: "POST",
-        headers: { "Content-type": "application/json; charset=UTF-8" },
-        body: JSON.stringify(newPost)
-    })
-
-    // let posts = await results.json()
-    // updateStatus(posts)
+    photoUpload.click()
 })
-
-
 
 ///grab data display all messages when the page loads
 
@@ -63,7 +73,7 @@ const updateStatus = (postsArr) => {
 
 }
 
-displayStatus()
+// displayStatus()
 
 
 

@@ -30,7 +30,7 @@ router.get('/logout', (req, res) => {
     "createdAt": "2021-11-03T18:04:55.732Z",
     "updatedAt": "2021-11-03T18:04:55.732Z",
     "posts": [
-      {
+    {
         "id": 1,
         "title": "mountain",
         "content": "this is a mountain that I made using some coding tricks",
@@ -40,16 +40,16 @@ router.get('/logout', (req, res) => {
         "createdAt": "2021-11-03T18:05:01.110Z",
         "updatedAt": "2021-11-03T18:05:01.110Z",
         "comments": [
-          {
+        {
             "id": 2,
             "content": "good stuff",
             "userid": 2,
             "postid": 1,
             "createdAt": "2021-11-03T18:16:49.173Z",
             "updatedAt": "2021-11-03T18:16:49.173Z"
-          }
+        }
         ]
-      }
+    }
     },
     {}
 ]
@@ -65,7 +65,10 @@ let grabPosts = async () => {
                 model: db.comments,
                 required: false
                 }]
-            }]
+            }],
+        order: [
+            [{model: db.posts}, "id", "DESC"]
+        ]
         }
     )
     return postRecords;

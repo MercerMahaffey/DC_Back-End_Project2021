@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const helmet = require('helmet');
+// const helmet = require('helmet'); // causing errors
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 require('./auth/passport-config')(passport);
@@ -10,11 +10,10 @@ require("dotenv").config()
 app.use(express.urlencoded({extended: false}))
 app.use(express.json())
 
-// app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.static('public'))
 
 app.set('view engine', 'ejs')
-app.use(helmet());
+// app.use(helmet()); // helmet is causing errors and not allowing the images to be displayed
 
 
 app.use(cookieSession({
