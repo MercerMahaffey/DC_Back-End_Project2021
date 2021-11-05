@@ -4,64 +4,10 @@ let appendHere = document.querySelector('#appendHere');
 let commentSubmit = document.querySelector('#commentSubmit')
 
 
-form.addEventListener('submit', async (e) => {
-    e.preventDefault()
-    // console.log('form');
-    // console.log(e.post-title);
-
-    let newPost = {
-        title: document.querySelector('#post-title').value,
-        content: document.querySelector('#post-message').value,
-        // imgurl: "imgURL"
-    }
-    console.log(newPost);
-
-    let results = await fetch('/user_posts', {
-        method: "POST",
-        headers: { "Content-type": "application/json; charset=UTF-8" },
-        body: JSON.stringify(newPost)
-    })
-
-    let posts = await results.json()
-    grabPost()
-})
-
-
-
-///grab data display all messages when the page loads
-
-// const displayStatus = async () => {
-
-//     let results = await fetch('/user_posts');
-
-//     let posts = await results.json();
-//     updateStatus(posts)
-
-
-// }
-
-
-
-
-
-//#############################################
-
-// let sendPost = async () => {
-//     let response = await fetch('/user_posts');
-//     // let results = await fetch('/user_posts');
-//     let records = await response.json();
-//     console.log(records);
-//     printPost(records)
-//     // let posts = await results.json();
-//     // updateStatus(posts)
-// }
-// sendPost()
-//##############################################
-
-
 
 let grabPost = async () => {
     let response = await fetch('/posts');
+    // console.log("grabbing post");
     // let results = await fetch('/user_posts');
     let records = await response.json();
     // console.log(records);
@@ -71,7 +17,7 @@ let grabPost = async () => {
 }
 
 let printPost = async (allPostsData) => {
-    
+    // console.log("printing post");
     let htmlBlock = '';
     // let allUsers = JSON.stringify(allPostsData)
     allPostsData.forEach(user => {
@@ -87,7 +33,7 @@ let printPost = async (allPostsData) => {
                 // console.log(commentName);
                 commentsHtmlBlock += `<div style="color: black;" ><span style="font-weight: bold; font-size: 20px;">${commentName}: </span>${comment.content}</div> <br>`
             })
-            console.log(commentsHtmlBlock);
+            // console.log(commentsHtmlBlock);
             htmlBlock += `<div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-0">
                         <div class="card-body p-0 d-flex">
                             <figure class="avatar me-3"><img src="https://via.placeholder.com/50x50.png" alt="image" class="shadow-sm rounded-circle w45"></figure>
@@ -105,11 +51,9 @@ let printPost = async (allPostsData) => {
                                 <div class="col-sm-12 p-1"><a href="${post.imgurl}" data-lightbox="roadtr"><img src="${post.imgurl}" class="rounded-3 w-100" alt="image"></a></div>                                        
                             </div>
                         </div>
-                        <form id="${post.id}" class="${user.id}">
+                        <form class="${user.id}" action="/comments/${post.id}" method="post">
                             <input class="typeCommentArea" type="text" placeholder="Add a comment." name="content"></input>
-
-                            
-                            <input class="commentSubmitButton" id="commentSubmit" type="submit" value="Post"></input>
+                            <input class="commentSubmitButton" id="commentSubmit" type="submit"></input>
                         </form>
                         <div id="${post.id}" class="commentSection card-body d-flex p-0">
                             
@@ -130,8 +74,26 @@ grabPost()
 
 
 let commentsSection = document.querySelector('#comments')
-appendHere.addEventListener('click', (e) =>{
+appendHere.addEventListener('click', async (e) =>{
     // console.log(e.target.id);
+    if(e.target.id ==="createPostUserButton"){
+        console.log('sending post');
+        let newPost = {
+            title: document.querySelector('#post-title').value,
+            content: document.querySelector('#post-message').value,
+            // imgurl: "imgURL"
+        }
+        console.log(newPost);
+    
+        let results = await fetch('/user_posts', {
+            method: "POST",
+            headers: { "Content-type": "application/json; charset=UTF-8" },
+            body: JSON.stringify(newPost)
+        })
+    
+        let posts = await results.json()
+        grabPost()
+    }
     if(e.target.id ==="commentButton"){
         // console.log(e.target.parentElement.parentElement.childNodes[2])
         if (e.target.parentElement.parentElement.childNodes[2].className === "none"){
@@ -142,61 +104,7 @@ appendHere.addEventListener('click', (e) =>{
         }
     }
     if(e.target.id === "commentSubmit"){
-        e.preventDefault();
-        console.log(e.target.parentElement.id);
-        console.log(e.target.parentElement.content.value);
+        // e.preventDefault();
+
     }
 })
-//#############################################
-
-
-    //attach to a dom element
-
-// }
-
-// displayStatus()
-
-
-
-
-//initialize post for each page
-//render all of todos from db onto page
-
-            // don't use this per veronica. Use cloudinary on the backend.
-            // let photoUpload = document.querySelector("#photoUpload")
-            // let photoUploadLink = document.querySelector("#photoUploadLink")
-
-
-            // // constants required for cloudinary photo upload
-            // const cloudinaryURL = "https://api.cloudinary.com/v1_1/dc-backend-project2021/image/upload"
-            // const cloudinaryUploadPreset = "wq5dyhd4"
-
-            // // Photo/Video link to trigger input tag "photoUpload"
-            // photoUploadLink.addEventListener("click", (e) => {
-            //     e.preventDefault()
-            //     photoUpload.click()
-            // })
-
-            // // input tag triggered by above event listener
-            // photoUpload.addEventListener("change", (e) => {
-            //     const file = e.target.files[0]
-            //     const formData = new FormData()
-            //     formData.append("file", file)
-            //     formData.append("upload_preset", cloudinaryUploadPreset)
-
-            //     fetch(cloudinaryURL, {
-            //         method: "POST",
-            //         body: formData
-            //     })
-            //     .then(response => response.json())
-            //     .then(data => {
-            //         if(data.secure_url !== ""){
-            //             const uploadedFileURL = data.secure_url
-            //             console.log(uploadedFileURL);
-            //         }
-            //     })
-            //     .catch(err => console.error(err))
-            // })
-
-
-
