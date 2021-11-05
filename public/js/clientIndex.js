@@ -17,6 +17,9 @@ let grabPost = async () => {
 
 let printPost = async (allPostsData) => {
     // console.log("printing post");
+    let usersArrayRaw = await fetch('/username');
+    let usersArray = await usersArrayRaw.json();
+    // console.log(usersArray);
     let htmlBlock = '';
     // let allUsers = JSON.stringify(allPostsData)
     allPostsData.forEach(user => {
@@ -31,31 +34,29 @@ let printPost = async (allPostsData) => {
                 // console.log('hello');
                 // console.log(allPostsData);
                 // console.log(allPostsData[comment.userid-1]);
-                let commentName = '';
-                console.log(allPostsData);
-                allPostsData.forEach(userObj => {
-                    if(userObj.id === comment.userid){
-                        commentName = userObj.username;
-                    }
-                })
-                if(!commentName){
-                    commentName = 'user'
+                // let commentName = '';
+                // console.log(allPostsData);
+                
+                
+                let commentName = usersArray[comment.userid-1].username
+                    // console.log(usersArray[comment.userid-1]);
                     // let user = await fetch('/username');
                     // let userName = await user.json();
 
                     // console.log(userName);
-                }
+                
                 // let commentName = allPostsData[comment.userid-1].username;
                 // console.log(commentName);
                 commentsHtmlBlock += `<div style="color: black;" ><span style="font-weight: bold; font-size: 20px;">${commentName}: </span>${comment.content}</div> <br>`
             })
+            
             // console.log(commentsHtmlBlock);
             if(post.imgurl){
             htmlBlock += `<div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-0">
                         <div class="card-body p-0 d-flex">
                             <figure class="avatar me-3"><img src="https://via.placeholder.com/50x50.png" alt="image" class="shadow-sm rounded-circle w45"></figure>
                             
-                            <h4 id="nameArea" class="fw-700 text-grey-900 font-xssss mt-1">${user.username}<span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">${post.createdAt.substring(0,16)}</span></h4>
+                            <h4 id="nameArea" class="fw-700 text-grey-900 font-xssss mt-1">${user.username}<span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">${post.createdAt.substring(0,10)} ${post.createdAt.substring(11,16)}</span></h4>
                             <a href="#" class="ms-auto"></a>
                         </div>
                         <div class="card-body p-0 me-lg-5">
@@ -85,7 +86,7 @@ let printPost = async (allPostsData) => {
                         <div class="card-body p-0 d-flex">
                             <figure class="avatar me-3"><img src="https://via.placeholder.com/50x50.png" alt="image" class="shadow-sm rounded-circle w45"></figure>
                             
-                            <h4 id="nameArea" class="fw-700 text-grey-900 font-xssss mt-1">${user.username}<span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">${post.createdAt.substring(0,16)}</span></h4>
+                            <h4 id="nameArea" class="fw-700 text-grey-900 font-xssss mt-1">${user.username}<span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">${post.createdAt.substring(0,10)} ${post.createdAt.substring(11,16)}</span></h4>
                             <a href="#" class="ms-auto"></a>
                         </div>
                         <div class="card-body p-0 me-lg-5">
