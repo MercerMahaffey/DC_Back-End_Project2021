@@ -2,8 +2,9 @@ const express = require('express');
 const app = express();
 const helmet = require('helmet');
 const port = 3000;
+require("dotenv").config()
 
-app.use(express.static('public'))
+app.use(express.static(path.join(__dirname, 'public')))
 app.set('view engine', 'ejs')
 
 app.use(express.urlencoded({extended: false}))
