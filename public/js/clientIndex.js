@@ -34,7 +34,7 @@ let printPost = async (allPostsData) => {
                             <figure class="avatar me-3"><img src="https://via.placeholder.com/50x50.png" alt="image" class="shadow-sm rounded-circle w45"></figure>
                             
                             <h4 id="nameArea" class="fw-700 text-grey-900 font-xssss mt-1">${user.username}<span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">${post.createdAt.substring(0,10)}</span></h4>
-                            <a href="#" class="ms-auto"><i class="ti-more-alt text-grey-900 btn-round-md bg-greylight font-xss"></i></a>
+                            <a href="#" class="ms-auto"></a>
                         </div>
                         <div class="card-body p-0 me-lg-5">
                             <h1>${post.title}</h1>
@@ -47,15 +47,15 @@ let printPost = async (allPostsData) => {
                             </div>
                         </div>
                         <form id="${post.id}" class="${user.id}">
-                            <input class="typeCommentArea" type="text" placeholder="Enter a comment here." name="content"></input>
+                            <input class="typeCommentArea" type="text" placeholder="Add a comment." name="content"></input>
 
                             
-                            <input id="commentSubmit" type="submit" placeholder="Send"></input>
+                            <input class="commentSubmitButton" id="commentSubmit" type="submit" placeholder="Send"></input>
                         </form>
                         <div id="${post.id}" class="commentSection card-body d-flex p-0">
                             
                             
-                            <a  style="cursor:pointer;" class="d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss"><i id="commentButton" class="feather-message-circle text-dark text-grey-900 btn-round-sm font-lg"></i><span id="commentButton" class="d-none-xss">${post.comments.length}</span></a><div id="comments" class="visually-hidden">` + commentsHtmlBlock + `</div></div></div><br></br>`
+                            <a  style="cursor:pointer;" class="d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss"><i id="commentButton" class="feather-message-circle text-dark text-grey-900 btn-round-sm font-lg"></i><span id="commentButton" class="d-none-xss">${post.comments.length} Comments.</span></a><div id="comments" class="visually-hidden">` + commentsHtmlBlock + `</div></div></div><br></br>`
                         
 
 
