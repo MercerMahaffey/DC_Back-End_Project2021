@@ -2,17 +2,21 @@
 let appendHere = document.querySelector('#appendHere');
 let commentSubmit = document.querySelector('#commentSubmit')
 
+
+
 let grabPost = async () => {
     let response = await fetch('/posts');
+    console.log("grabbing post");
+    // let results = await fetch('/user_posts');
     let records = await response.json();
-    console.log(records);
+    // console.log(records);
     printPost(records)
-
+    // let posts = await results.json();
+    // updateStatus(posts)
 }
 
-
 let printPost = async (allPostsData) => {
-    
+    console.log("printing post");
     let htmlBlock = '';
     // let allUsers = JSON.stringify(allPostsData)
     allPostsData.forEach(user => {
@@ -28,7 +32,7 @@ let printPost = async (allPostsData) => {
                 // console.log(commentName);
                 commentsHtmlBlock += `<div style="color: black;" ><span style="font-weight: bold; font-size: 20px;">${commentName}: </span>${comment.content}</div> <br>`
             })
-            console.log(commentsHtmlBlock);
+            // console.log(commentsHtmlBlock);
             htmlBlock += `<div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-0">
                         <div class="card-body p-0 d-flex">
                             <figure class="avatar me-3"><img src="https://via.placeholder.com/50x50.png" alt="image" class="shadow-sm rounded-circle w45"></figure>
@@ -50,7 +54,7 @@ let printPost = async (allPostsData) => {
                             <input class="typeCommentArea" type="text" placeholder="Add a comment." name="content"></input>
 
                             
-                            <input class="commentSubmitButton" id="commentSubmit" type="submit" placeholder="Send"></input>
+                            <input class="commentSubmitButton" id="commentSubmit" type="submit" value="Post"></input>
                         </form>
                         <div id="${post.id}" class="commentSection card-body d-flex p-0">
                             
@@ -71,8 +75,26 @@ grabPost()
 
 
 let commentsSection = document.querySelector('#comments')
-appendHere.addEventListener('click', (e) =>{
+appendHere.addEventListener('click', async (e) =>{
     // console.log(e.target.id);
+    if(e.target.id ==="createPostUserButton"){
+        console.log('sending post');
+        let newPost = {
+            title: document.querySelector('#post-title').value,
+            content: document.querySelector('#post-message').value,
+            // imgurl: "imgURL"
+        }
+        console.log(newPost);
+    
+        let results = await fetch('/user_posts', {
+            method: "POST",
+            headers: { "Content-type": "application/json; charset=UTF-8" },
+            body: JSON.stringify(newPost)
+        })
+    
+        let posts = await results.json()
+        grabPost()
+    }
     if(e.target.id ==="commentButton"){
         // console.log(e.target.parentElement.parentElement.childNodes[2])
         if (e.target.parentElement.parentElement.childNodes[2].className === "none"){
