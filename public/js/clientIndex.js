@@ -50,7 +50,7 @@ let printPost = async (allPostsData) => {
                             <input class="typeCommentArea" type="text" placeholder="Add a comment." name="content"></input>
 
                             
-                            <input class="commentSubmitButton" id="commentSubmit" type="submit" placeholder="Send"></input>
+                            <input class="commentSubmitButton" id="commentSubmit" type="submit" value="Post"></input>
                         </form>
                         <div id="${post.id}" class="commentSection card-body d-flex p-0">
                             
