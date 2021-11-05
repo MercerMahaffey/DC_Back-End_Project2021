@@ -24,15 +24,33 @@ let printPost = async (allPostsData) => {
         userPosts.forEach(post => {
             let postComments = post.comments;
             let commentsHtmlBlock = '';
+            // console.log(postComments);
             postComments.forEach(comment => {
                 // console.log(typeof comment.userid);
                 // console.log(comment.userid);
+                // console.log('hello');
+                // console.log(allPostsData);
                 // console.log(allPostsData[comment.userid-1]);
-                let commentName = allPostsData[comment.userid-1].username;
+                let commentName = '';
+                console.log(allPostsData);
+                allPostsData.forEach(userObj => {
+                    if(userObj.id === comment.userid){
+                        commentName = userObj.username;
+                    }
+                })
+                if(!commentName){
+                    commentName = 'user'
+                    // let user = await fetch('/username');
+                    // let userName = await user.json();
+
+                    // console.log(userName);
+                }
+                // let commentName = allPostsData[comment.userid-1].username;
                 // console.log(commentName);
                 commentsHtmlBlock += `<div style="color: black;" ><span style="font-weight: bold; font-size: 20px;">${commentName}: </span>${comment.content}</div> <br>`
             })
             // console.log(commentsHtmlBlock);
+            if(post.imgurl){
             htmlBlock += `<div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-0">
                         <div class="card-body p-0 d-flex">
                             <figure class="avatar me-3"><img src="https://via.placeholder.com/50x50.png" alt="image" class="shadow-sm rounded-circle w45"></figure>
@@ -54,14 +72,39 @@ let printPost = async (allPostsData) => {
                             <input class="typeCommentArea" type="text" placeholder="Add a comment." name="content"></input>
 
                             <div>
-                                <input class="commentSubmitButton" id="commentSubmit" type="submit"></input>
+                                <button class="commentSubmitButton" id="commentSubmit" type="submit">Post</button>
                             </div>
                         </form>
                         <div id="${post.id}" class="commentSection card-body d-flex p-0">
                             
                             
                             <a  style="cursor:pointer;" class="d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss"><i id="commentButton" class="feather-message-circle text-dark text-grey-900 btn-round-sm font-lg"></i><span id="commentButton" class="d-none-xss">${post.comments.length} Comments.</span></a><div id="comments" class="visually-hidden">` + commentsHtmlBlock + `</div></div></div><br></br>`
+            }
+            else{
+                htmlBlock += `<div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-0">
+                        <div class="card-body p-0 d-flex">
+                            <figure class="avatar me-3"><img src="https://via.placeholder.com/50x50.png" alt="image" class="shadow-sm rounded-circle w45"></figure>
+                            
+                            <h4 id="nameArea" class="fw-700 text-grey-900 font-xssss mt-1">${user.username}<span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">${post.createdAt.substring(0,16)}</span></h4>
+                            <a href="#" class="ms-auto"></a>
+                        </div>
+                        <div class="card-body p-0 me-lg-5">
+                            <h1>${post.title}</h1>
+                            <p class="fw-500 lh-26 font-xssss w-100 mb-2">${post.content}</p>
+                        </div>
                         
+                        <form class="${user.id}" action="/comments/${post.id}" method="post">
+                            <input class="typeCommentArea" type="text" placeholder="Add a comment." name="content"></input>
+
+                            <div>
+                                <button class="commentSubmitButton" id="commentSubmit" type="submit">Post</button>
+                            </div>
+                        </form>
+                        <div id="${post.id}" class="commentSection card-body d-flex p-0">
+                            
+                            
+                            <a  style="cursor:pointer;" class="d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss"><i id="commentButton" class="feather-message-circle text-dark text-grey-900 btn-round-sm font-lg"></i><span id="commentButton" class="d-none-xss">${post.comments.length} Comments.</span></a><div id="comments" class="visually-hidden">` + commentsHtmlBlock + `</div></div></div><br></br>`
+            }
 
 
                     
@@ -87,7 +130,7 @@ appendHere.addEventListener('click', async (e) =>{
         }
         console.log(newPost);
     
-        let results = await fetch('/user_posts', {
+        let results = await fetch('/posts', {
             method: "POST",
             headers: { "Content-type": "application/json; charset=UTF-8" },
             body: JSON.stringify(newPost)
