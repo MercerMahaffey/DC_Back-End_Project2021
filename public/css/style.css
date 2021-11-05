@@ -53,10 +53,14 @@
   justify-content: center;
 }
 
+#resource{
+  padding-left: 15px;
+}
+
+
 #frameRight{
   padding-left: 65px;
 }
-
 
 .commentSection{
   display: flex;
