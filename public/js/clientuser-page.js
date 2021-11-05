@@ -2,8 +2,13 @@
 let form = document.getElementById('postSubmit')
 let appendHere = document.querySelector('#appendHere');
 let commentSubmit = document.querySelector('#commentSubmit')
+let photoUpload = document.querySelector("#photoUpload") // input tag to upload photo/video
+let photoUploadLink = document.querySelector("#photoUploadLink") // anchor tag "Photo/Video"
 
-
+photoUploadLink.addEventListener("click", (e) => {
+    e.preventDefault()
+    photoUpload.click()
+})
 
 let grabPost = async () => {
     let response = await fetch('/posts');
