@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Elomoas - Online Course and LMS HTML Template</title>
+    <title>DOORZ - Social Network For Developers</title>
 
     <link rel="stylesheet" href="css/themify-icons.css">
     <link rel="stylesheet" href="css/feather.css">
@@ -26,14 +26,14 @@
 
         <div class="nav-header bg-transparent shadow-none border-0">
             <div class="nav-top w-100">
-                <a href="default.html"><i class="feather-zap text-success display1-size me-2 ms-0"></i><span class="d-inline-block fredoka-font ls-3 fw-600 text-current font-xxl logo-text mb-0">Sociala. </span> </a>
-                <a href="#" class="mob-menu ms-auto me-2 chat-active-btn"><i class="feather-message-circle text-grey-900 font-sm btn-round-md bg-greylight"></i></a>
-                <a href="default-video.html" class="mob-menu me-2"><i class="feather-video text-grey-900 font-sm btn-round-md bg-greylight"></i></a>
-                <a href="#" class="me-2 menu-search-icon mob-menu"><i class="feather-search text-grey-900 font-sm btn-round-md bg-greylight"></i></a>
+                <a href="/"><i class="feather-zap text-success display1-size me-2 ms-0"></i><span class="d-inline-block fredoka-font ls-3 fw-600 text-current font-xxl logo-text mb-0">DOORZ </span> </a>
+                <a href="/" class="mob-menu ms-auto me-2 chat-active-btn"></a>
+                
+                
                 <button class="nav-menu me-0 ms-2"></button>
 
-                <a href="#" class="header-btn d-none d-lg-block bg-dark fw-500 text-white font-xsss p-3 ms-auto w100 text-center lh-20 rounded-xl" data-toggle="modal" data-target="#Modallogin">Login</a>
-                <a href="#" class="header-btn d-none d-lg-block bg-current fw-500 text-white font-xsss p-3 ms-2 w100 text-center lh-20 rounded-xl" data-toggle="modal" data-target="#Modalregister">Register</a>
+                <a href="/login" class="header-btn d-none d-lg-block bg-dark fw-500 text-white font-xsss p-3 ms-auto w100 text-center lh-20 rounded-xl" data-toggle="modal" data-target="#Modallogin">Login</a>
+                <a href="/register" class="header-btn d-none d-lg-block bg-current fw-500 text-white font-xsss p-3 ms-2 w100 text-center lh-20 rounded-xl" data-toggle="modal" data-target="#Modalregister">Register</a>
 
             </div>
             
@@ -46,35 +46,31 @@
                 <div class="card shadow-none border-0 ms-auto me-auto login-card">
                     <div class="card-body rounded-0 text-left">
                         <h2 class="fw-700 display1-size display2-md-size mb-4">Create <br>your account</h2>                        
-                        <form>
+                        <form id="registerForm" action="/register" method="post">
                             
                             <div class="form-group icon-input mb-3">
                                 <i class="font-sm ti-user text-grey-500 pe-0"></i>
-                                <input type="text" class="style2-input ps-5 form-control text-grey-900 font-xsss fw-600" placeholder="Your Name">                        
+                                <input type="text" class="style2-input ps-5 form-control text-grey-900 font-xsss fw-600" name="username" placeholder="Your Name">                        
                             </div>
                             <div class="form-group icon-input mb-3">
                                 <i class="font-sm ti-email text-grey-500 pe-0"></i>
-                                <input type="text" class="style2-input ps-5 form-control text-grey-900 font-xsss fw-600" placeholder="Your Email Address">                        
+                                <input type="text" class="style2-input ps-5 form-control text-grey-900 font-xsss fw-600" name="email" placeholder="Your Email Address">                        
                             </div>
                             <div class="form-group icon-input mb-3">
-                                <input type="Password" class="style2-input ps-5 form-control text-grey-900 font-xss ls-3" placeholder="Password">
+                                <input id="password1" type="Password" class="style2-input ps-5 form-control text-grey-900 font-xss ls-3" name="password" placeholder="Password">
                                 <i class="font-sm ti-lock text-grey-500 pe-0"></i>
                             </div>
                             <div class="form-group icon-input mb-1">
-                                <input type="Password" class="style2-input ps-5 form-control text-grey-900 font-xss ls-3" placeholder="Confirm Password">
+                                <input id="password2" type="Password" class="style2-input ps-5 form-control text-grey-900 font-xss ls-3" name="password2" placeholder="Confirm Password">
                                 <i class="font-sm ti-lock text-grey-500 pe-0"></i>
                             </div>
-                            <div class="form-check text-left mb-3">
-                                <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1">
-                                <label class="form-check-label font-xsss text-grey-500" for="exampleCheck1">Accept Term and Conditions</label>
-                                <!-- <a href="#" class="fw-600 font-xsss text-grey-700 mt-1 float-right">Forgot your Password?</a> -->
+                            <div class="col-sm-12 p-0 text-left">
+                                <input type="submit" class="form-control text-center style2-input text-white fw-600 bg-dark border-0 p-0 "></input>
+                                <h6 class="text-grey-500 font-xsss fw-500 mt-0 mb-0 lh-32">Already have account <a href="login.html" class="fw-700 ms-1">Login</a></h6>
                             </div>
                         </form>
-                         
-                        <div class="col-sm-12 p-0 text-left">
-                            <div class="form-group mb-1"><a href="#" class="form-control text-center style2-input text-white fw-600 bg-dark border-0 p-0 ">Register</a></div>
-                            <h6 class="text-grey-500 font-xsss fw-500 mt-0 mb-0 lh-32">Already have account <a href="login.html" class="fw-700 ms-1">Login</a></h6>
-                        </div>
+                        <h4 id="passwordWarning" class="fw-700 mb-4 text-danger visually-hidden">Passwords Don't Match</h4>
+                        
                          
                     </div>
                 </div> 
@@ -109,7 +105,7 @@
                             </form>
                              
                             <div class="col-sm-12 p-0 text-left">
-                                <div class="form-group mb-1"><a href="#" class="form-control text-center style2-input text-white fw-600 bg-dark border-0 p-0 ">Login</a></div>
+                                <div class="form-group mb-1"><a href="/login" class="form-control text-center style2-input text-white fw-600 bg-dark border-0 p-0 ">Login</a></div>
                                 <h6 class="text-grey-500 font-xsss fw-500 mt-0 mb-0 lh-32">Dont have account <a href="register.html" class="fw-700 ms-1">Register</a></h6>
                             </div>
                             <div class="col-sm-12 p-0 text-center mt-3 ">
@@ -181,7 +177,7 @@
 
     <script src="js/plugin.js"></script>
     <script src="js/scripts.js"></script>
-    
+    <script src="js/clientRegister.js"></script>
 </body>
 
 </html>
