@@ -119,6 +119,7 @@ router.post('/posts', async (req, res) => {
 
     // deconstructing from json so all are strings
     let {title, content, languages, userid, imgurl} = req.body;
+    console.log(req.body)
 
     await db.posts.create({title, content, languages, userid, imgurl})
     

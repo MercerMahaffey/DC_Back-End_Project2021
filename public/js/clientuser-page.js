@@ -1,8 +1,13 @@
 
+<<<<<<< HEAD
+=======
+let form = document.getElementById('postSubmit')
+>>>>>>> main
 let appendHere = document.querySelector('#appendHere');
 let commentSubmit = document.querySelector('#commentSubmit')
 
 
+<<<<<<< HEAD
 
 let grabPost = async () => {
     let response = await fetch('/posts');
@@ -17,6 +22,76 @@ let grabPost = async () => {
 
 let printPost = async (allPostsData) => {
     console.log("printing post");
+=======
+form.addEventListener('submit', async (e) => {
+    e.preventDefault()
+    // console.log('form');
+    // console.log(e.post-title);
+
+    let newPost = {
+        title: document.querySelector('#post-title').value,
+        content: document.querySelector('#post-message').value,
+        // imgurl: "imgURL"
+    }
+    console.log(newPost);
+
+    let results = await fetch('/user_posts', {
+        method: "POST",
+        headers: { "Content-type": "application/json; charset=UTF-8" },
+        body: JSON.stringify(newPost)
+    })
+
+    let posts = await results.json()
+    grabPost()
+})
+
+
+
+///grab data display all messages when the page loads
+
+// const displayStatus = async () => {
+
+//     let results = await fetch('/user_posts');
+
+//     let posts = await results.json();
+//     updateStatus(posts)
+
+
+// }
+
+
+
+
+
+//#############################################
+
+// let sendPost = async () => {
+//     let response = await fetch('/user_posts');
+//     // let results = await fetch('/user_posts');
+//     let records = await response.json();
+//     console.log(records);
+//     printPost(records)
+//     // let posts = await results.json();
+//     // updateStatus(posts)
+// }
+// sendPost()
+//##############################################
+
+
+
+let grabPost = async () => {
+    let response = await fetch('/posts');
+    // let results = await fetch('/user_posts');
+    let records = await response.json();
+    // console.log(records);
+    printPost(records)
+    // let posts = await results.json();
+    // updateStatus(posts)
+}
+
+let printPost = async (allPostsData) => {
+    
+>>>>>>> main
     let htmlBlock = '';
     // let allUsers = JSON.stringify(allPostsData)
     allPostsData.forEach(user => {
@@ -32,7 +107,11 @@ let printPost = async (allPostsData) => {
                 // console.log(commentName);
                 commentsHtmlBlock += `<div style="color: black;" ><span style="font-weight: bold; font-size: 20px;">${commentName}: </span>${comment.content}</div> <br>`
             })
+<<<<<<< HEAD
             // console.log(commentsHtmlBlock);
+=======
+            console.log(commentsHtmlBlock);
+>>>>>>> main
             htmlBlock += `<div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-0">
                         <div class="card-body p-0 d-flex">
                             <figure class="avatar me-3"><img src="https://via.placeholder.com/50x50.png" alt="image" class="shadow-sm rounded-circle w45"></figure>
@@ -68,9 +147,41 @@ let printPost = async (allPostsData) => {
     })
     appendHere.innerHTML = appendHere.innerHTML + htmlBlock;
     // commentButtonEventFunction()
+<<<<<<< HEAD
+=======
 
 }
 
+grabPost()
+
+
+let commentsSection = document.querySelector('#comments')
+appendHere.addEventListener('click', (e) =>{
+    // console.log(e.target.id);
+    if(e.target.id ==="commentButton"){
+        // console.log(e.target.parentElement.parentElement.childNodes[2])
+        if (e.target.parentElement.parentElement.childNodes[2].className === "none"){
+            e.target.parentElement.parentElement.childNodes[2].className = "visually-hidden"
+        }
+        else if (e.target.parentElement.parentElement.childNodes[2].className === "visually-hidden"){
+            e.target.parentElement.parentElement.childNodes[2].className = "none"
+        }
+    }
+    if(e.target.id === "commentSubmit"){
+        e.preventDefault();
+        console.log(e.target.parentElement.id);
+        console.log(e.target.parentElement.content.value);
+    }
+})
+//#############################################
+
+
+    //attach to a dom element
+>>>>>>> main
+
+// }
+
+<<<<<<< HEAD
 grabPost()
 
 
@@ -110,3 +221,51 @@ appendHere.addEventListener('click', async (e) =>{
         console.log(e.target.parentElement.content.value);
     }
 })
+=======
+// displayStatus()
+
+
+
+
+//initialize post for each page
+//render all of todos from db onto page
+
+            // don't use this per veronica. Use cloudinary on the backend.
+            // let photoUpload = document.querySelector("#photoUpload")
+            // let photoUploadLink = document.querySelector("#photoUploadLink")
+
+
+            // // constants required for cloudinary photo upload
+            // const cloudinaryURL = "https://api.cloudinary.com/v1_1/dc-backend-project2021/image/upload"
+            // const cloudinaryUploadPreset = "wq5dyhd4"
+
+            // // Photo/Video link to trigger input tag "photoUpload"
+            // photoUploadLink.addEventListener("click", (e) => {
+            //     e.preventDefault()
+            //     photoUpload.click()
+            // })
+
+            // // input tag triggered by above event listener
+            // photoUpload.addEventListener("change", (e) => {
+            //     const file = e.target.files[0]
+            //     const formData = new FormData()
+            //     formData.append("file", file)
+            //     formData.append("upload_preset", cloudinaryUploadPreset)
+
+            //     fetch(cloudinaryURL, {
+            //         method: "POST",
+            //         body: formData
+            //     })
+            //     .then(response => response.json())
+            //     .then(data => {
+            //         if(data.secure_url !== ""){
+            //             const uploadedFileURL = data.secure_url
+            //             console.log(uploadedFileURL);
+            //         }
+            //     })
+            //     .catch(err => console.error(err))
+            // })
+
+
+
+>>>>>>> main
