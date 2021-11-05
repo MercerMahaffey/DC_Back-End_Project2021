@@ -6,6 +6,7 @@ let form = document.getElementById('postSubmit')
 
 form.addEventListener('submit', async (e) => {
     e.preventDefault()
+    // console.log('form');
 
     let newPost = {
         title: document.querySelector('#post-title').value,
@@ -42,18 +43,29 @@ const displayStatus = async () => {
 const updateStatus = (postsArr) => {
     let htmlBlock = "";
 
-    postsArr.forEach((element, index) => {
+    postsArr.forEach((element) => {
 
-        //     htmlBlock +=
-        //     htmlBlock +=
-        //     htmlBlock +=
-        //     htmlBlock +=
-        //     htmlBlock +=
+        htmlBlock += '     <div class="">';
+        htmlBlock += '       <div class="">';
+        htmlBlock += '         <div class="">';
+        htmlBlock += '           <div class="">';
+        htmlBlock += '             <div class="post-title">' + element.title + '</div>';
+        htmlBlock += '           </div>';
+        htmlBlock += '          <div>';
+        htmlBlock += '           <div class="post-message">' + element.content + '</div>';
+        htmlBlock += '          </div>';
+        htmlBlock += '         </div>';
+        htmlBlock += '        </div>';
+        htmlBlock += '      </div>';
     })
 
     //attach to a dom element
 
 }
+
+displayStatus()
+
+
 
 
 //initialize post for each page
@@ -96,5 +108,4 @@ const updateStatus = (postsArr) => {
             // })
 
 
-//attach to a dom element
 
