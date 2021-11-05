@@ -5,6 +5,7 @@ const db = require('../models');
 const auth = require('../auth/index');
 
 router.get('/', auth, (req, res) => {
+    console.log(req.session.passport.user);
     res.render('index')
 })
 
@@ -117,9 +118,10 @@ router.get('/posts', async (req, res) => {
 // creating new post
 router.post('/posts', async (req, res) => {
 
+    let userid = req.session.passport.user;
     // deconstructing from json so all are strings
-    let {title, content, languages, userid, imgurl} = req.body;
-    console.log(req.body)
+    let {title, content, languages, imgurl} = req.body;
+    // console.log(req.body)
 
     await db.posts.create({title, content, languages, userid, imgurl})
     
@@ -208,16 +210,19 @@ router.put('/posts/updateimgurl/:postid', async (req, res) => {
     }
  */
 // creating new comment
-router.post('/comments', async (req, res) => {
+router.post('/comments/:postid', async (req, res) => {
+    console.log('creating comment');
+    console.log(req.session.passport.user);
+    let userid = req.session.passport.user;
+    let postid = req.params.postid
 
-    let {content, userid, postid} = req.body;
+    let {content} = req.body;
+    // console.log(content, postid);
 
     await db.comments.create({content, userid, postid})
-    
 
-    let postRecords = await grabPosts();
-    
-    res.json(postRecords);
+
+    res.redirect('/')
 })
 
 /**
@@ -235,7 +240,7 @@ router.put('/posts/updatecomment/:commentid', async (req, res) => {
     await db.comments.update({content: newContent}, {where: {id: commentid}})
 
     let postRecords = await grabPosts();
-    
+
     res.json(postRecords);
 
 })
