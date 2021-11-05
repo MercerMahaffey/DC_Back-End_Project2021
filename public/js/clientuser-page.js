@@ -1,5 +1,4 @@
 
-let form = document.getElementById('postSubmit')
 let appendHere = document.querySelector('#appendHere');
 let commentSubmit = document.querySelector('#commentSubmit')
 let photoUpload = document.querySelector("#photoUpload") // input tag to upload photo/video
@@ -11,7 +10,7 @@ photoUploadLink.addEventListener("click", (e) => {
 })
 
 let grabPost = async () => {
-    let response = await fetch('/posts');
+    let response = await fetch('/user_posts');
     // console.log("grabbing post");
     // let results = await fetch('/user_posts');
     let records = await response.json();
@@ -22,12 +21,14 @@ let grabPost = async () => {
 }
 
 let printPost = async (allPostsData) => {
-    // console.log("printing post");
+    console.log("printing post");
     let htmlBlock = '';
     // let allUsers = JSON.stringify(allPostsData)
     allPostsData.forEach(user => {
         let userPosts = user.posts;
+        console.log(userPosts);
         userPosts.forEach(post => {
+            console.log(post);
             let postComments = post.comments;
             let commentsHtmlBlock = '';
             postComments.forEach(comment => {

@@ -173,7 +173,8 @@
                                 <div class="card-body p-0">
                                     <!-- <a href="#" class=" font-xssss fw-600 bg-info text-grey-500 card-body p-0 d-flex align-items-center"><i class="btn-round-sm font-xs text-primary feather-edit-3 me-2 bg-greylight"></i>Create Post</a> -->
                                 </div>
-                        
+                            <form id="photoUploadLink" action="/user_posts" enctype="multipart/form-data" method="post">
+
                                 <div class="card-body p-0 mt-0 position-relative">
                                     <input type="text" name="post-title" id="post-title" class="bor-0 w-100 rounded-xxl p-2 ps-2 font-xssss text-grey-500 fw-500 border-light-md theme-dark-bg" cols="30" rows="10" placeholder="Post Title"></input>
                                 </div>
@@ -187,7 +188,9 @@
                                 <input id="photoUpload" type="file" name="upload">
                                 <div id="createPhotoUserButton" class="btn btn-danger">Photo</div>
                                 &nbsp;
-                                <div id="createPostUserButton" class="btn btn-primary text-white">Create Post</div>
+                                <!-- <div id="createPostUserButton" class="btn btn-primary text-white">Create Post</div> -->
+                                <button id="createPostUserButton" class="btn btn-primary text-white" type="submit">Create Post</button>
+                            </form>
                         
                                     <!-- <a href="#" class="d-flex align-items-center font-xssss fw-600 ls-1 text-grey-700 text-dark pe-4"><i class="font-md text-warning feather-camera me-2"></i><span class="d-none-xs">Feeling/Activity</span></a> -->
                                     <!-- <a href="#" class="ms-auto" id="dropdownMenu8" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ti-more-alt text-grey-900 btn-round-md bg-greylight font-xss"></i></a> -->

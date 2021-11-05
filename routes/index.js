@@ -66,7 +66,10 @@ let grabPosts = async () => {
                 model: db.comments,
                 required: false
                 }]
-            }]
+            }],
+            order: [
+                [{model: db.posts}, "id", "DESC"]
+            ]
         }
     )
     return postRecords;

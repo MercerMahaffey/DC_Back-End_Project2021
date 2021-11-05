@@ -15,6 +15,27 @@ cloudinary.config({
     api_secret: process.env.API_SECRET
 })
 
+let grabPosts = async (userid) => {
+    let postRecords = await db.users.findAll(
+        {
+        where: {id: userid},
+        include: [{
+            model:db.posts,
+            required: true,
+            include: [{
+                model: db.comments,
+                required: false,
+                }]
+            }],
+            order: [
+                [{model: db.posts}, "id", "DESC"]
+            ]
+        }
+    )
+    console.log(postRecords);
+    return postRecords;
+}
+
 router.get('/user-page', auth, (req, res) => {
     res.render('user-page')
 })
@@ -23,6 +44,19 @@ router.get('/users', async (req, res) => {
     let users = await db.users.findAll()
 
     res.json(users)
+})
+
+router.get("/user_posts", async (req, res) => {
+    let userid = req.session.passport.user;
+    console.log("user_posts")
+    let postRecords = await grabPosts(userid);
+
+    // first array is user, second array is post of that user
+    // let languagesArray = postRecords[0].posts[0].languages.split(',');
+
+    // console.log(languagesArray);
+    res.set("Content-Security-Policy", "default-src 'self'; img-src *'");
+    res.json(postRecords);
 })
 
 router.post("/user_posts", async (req, res) => {
