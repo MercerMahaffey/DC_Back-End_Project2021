@@ -3,8 +3,9 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../models')
+const auth = require('../auth/index');
 
-router.get('/user-page', (req, res) => {
+router.get('/user-page', auth, (req, res) => {
     res.render('user-page')
 })
 

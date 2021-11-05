@@ -6,7 +6,7 @@ let commentSubmit = document.querySelector('#commentSubmit')
 
 let grabPost = async () => {
     let response = await fetch('/posts');
-    console.log("grabbing post");
+    // console.log("grabbing post");
     // let results = await fetch('/user_posts');
     let records = await response.json();
     // console.log(records);
@@ -16,7 +16,7 @@ let grabPost = async () => {
 }
 
 let printPost = async (allPostsData) => {
-    console.log("printing post");
+    // console.log("printing post");
     let htmlBlock = '';
     // let allUsers = JSON.stringify(allPostsData)
     allPostsData.forEach(user => {
@@ -50,11 +50,9 @@ let printPost = async (allPostsData) => {
                                 <div class="col-sm-12 p-1"><a href="${post.imgurl}" data-lightbox="roadtr"><img src="${post.imgurl}" class="rounded-3 w-100" alt="image"></a></div>                                        
                             </div>
                         </div>
-                        <form id="${post.id}" class="${user.id}">
+                        <form class="${user.id}" action="/comments/${post.id}" method="post">
                             <input class="typeCommentArea" type="text" placeholder="Add a comment." name="content"></input>
-
-                            
-                            <input class="commentSubmitButton" id="commentSubmit" type="submit" value="Post"></input>
+                            <input class="commentSubmitButton" id="commentSubmit" type="submit"></input>
                         </form>
                         <div id="${post.id}" class="commentSection card-body d-flex p-0">
                             
@@ -105,9 +103,8 @@ appendHere.addEventListener('click', async (e) =>{
         }
     }
     if(e.target.id === "commentSubmit"){
-        e.preventDefault();
-        console.log(e.target.parentElement.id);
-        console.log(e.target.parentElement.content.value);
+        // e.preventDefault();
+
     }
 })
 // if(commentsSection.className === "visually-hidden"){
@@ -123,16 +120,16 @@ appendHere.addEventListener('click', async (e) =>{
 
 
 
-{/* <div class="card-body d-flex p-0">
+/* <div class="card-body d-flex p-0">
                             
                             
                             <a href="#" class="d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss"><i class="feather-message-circle text-dark text-grey-900 btn-round-sm font-lg"></i><span class="d-none-xss">${post.comments.length}</span></a>
                             <div> </div>
                         </div>
                     </div>
-                        <br></br> */}
+                        <br></br> */
 
-{/* <div class="card-body border-top-xs pt-4 pb-3 pe-4 d-block ps-5"> <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-6.png" alt="image" class="shadow-sm rounded-circle w35"></figure><div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg"><h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Victor Exrixon <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4><p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nulla dolor.</p></div></div> */}
+/* <div class="card-body border-top-xs pt-4 pb-3 pe-4 d-block ps-5"> <figure class="avatar position-absolute left-0 ms-2 mt-1"><img src="images/user-6.png" alt="image" class="shadow-sm rounded-circle w35"></figure><div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg"><h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Victor Exrixon <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4><p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nulla dolor.</p></div></div> */
 
 
 // $('#lightbox').append('<div class="right-comment chat-left scroll-bar theme-dark-bg"> <div class="card-body border-top-xs pt-4 pb-3 pe-4 d-block ps-5"> <figure class="avatar position-absolute left-0 ms-2 mt-1"></figure><div class="chat p-3 bg-greylight rounded-xxl d-block text-left theme-dark-bg"><h4 class="fw-700 text-grey-900 font-xssss mt-0 mb-1">Victor Exrixon <a href="#" class="ms-auto"><i class="ti-more-alt float-right text-grey-800 font-xsss"></i></a></h4><p class="fw-500 text-grey-500 lh-20 font-xssss w-100 mt-2 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nulla dolor.</p></div></div> </div></div></div>');

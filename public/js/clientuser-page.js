@@ -6,7 +6,7 @@ let commentSubmit = document.querySelector('#commentSubmit')
 
 let grabPost = async () => {
     let response = await fetch('/posts');
-    console.log("grabbing post");
+    // console.log("grabbing post");
     // let results = await fetch('/user_posts');
     let records = await response.json();
     // console.log(records);
@@ -16,7 +16,7 @@ let grabPost = async () => {
 }
 
 let printPost = async (allPostsData) => {
-    console.log("printing post");
+    // console.log("printing post");
     let htmlBlock = '';
     // let allUsers = JSON.stringify(allPostsData)
     allPostsData.forEach(user => {
@@ -50,11 +50,9 @@ let printPost = async (allPostsData) => {
                                 <div class="col-sm-12 p-1"><a href="${post.imgurl}" data-lightbox="roadtr"><img src="${post.imgurl}" class="rounded-3 w-100" alt="image"></a></div>                                        
                             </div>
                         </div>
-                        <form id="${post.id}" class="${user.id}">
+                        <form class="${user.id}" action="/comments/${post.id}" method="post">
                             <input class="typeCommentArea" type="text" placeholder="Add a comment." name="content"></input>
-
-                            
-                            <input class="commentSubmitButton" id="commentSubmit" type="submit" value="Post"></input>
+                            <input class="commentSubmitButton" id="commentSubmit" type="submit"></input>
                         </form>
                         <div id="${post.id}" class="commentSection card-body d-flex p-0">
                             
@@ -105,8 +103,7 @@ appendHere.addEventListener('click', async (e) =>{
         }
     }
     if(e.target.id === "commentSubmit"){
-        e.preventDefault();
-        console.log(e.target.parentElement.id);
-        console.log(e.target.parentElement.content.value);
+        // e.preventDefault();
+
     }
 })
