@@ -56,6 +56,44 @@ const updateStatus = (postsArr) => {
 }
 
 
+//initialize post for each page
+//render all of todos from db onto page
+
+            // don't use this per veronica. Use cloudinary on the backend.
+            // let photoUpload = document.querySelector("#photoUpload")
+            // let photoUploadLink = document.querySelector("#photoUploadLink")
+
+
+            // // constants required for cloudinary photo upload
+            // const cloudinaryURL = "https://api.cloudinary.com/v1_1/dc-backend-project2021/image/upload"
+            // const cloudinaryUploadPreset = "wq5dyhd4"
+
+            // // Photo/Video link to trigger input tag "photoUpload"
+            // photoUploadLink.addEventListener("click", (e) => {
+            //     e.preventDefault()
+            //     photoUpload.click()
+            // })
+
+            // // input tag triggered by above event listener
+            // photoUpload.addEventListener("change", (e) => {
+            //     const file = e.target.files[0]
+            //     const formData = new FormData()
+            //     formData.append("file", file)
+            //     formData.append("upload_preset", cloudinaryUploadPreset)
+
+            //     fetch(cloudinaryURL, {
+            //         method: "POST",
+            //         body: formData
+            //     })
+            //     .then(response => response.json())
+            //     .then(data => {
+            //         if(data.secure_url !== ""){
+            //             const uploadedFileURL = data.secure_url
+            //             console.log(uploadedFileURL);
+            //         }
+            //     })
+            //     .catch(err => console.error(err))
+            // })
 
 
 //attach to a dom element
