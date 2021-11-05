@@ -96,10 +96,10 @@ router.get('/posts', async (req, res) => {
     let postRecords = await grabPosts();
 
     // first array is user, second array is post of that user
-    let languagesArray = postRecords[0].posts[0].languages.split(',');
+    // let languagesArray = postRecords[0].posts[0].languages.split(',');
 
-    console.log(languagesArray);
-    
+    // console.log(languagesArray);
+    res.set("Content-Security-Policy", "default-src 'self'; img-src *'");
     res.json(postRecords);
 })
 
@@ -119,6 +119,7 @@ router.post('/posts', async (req, res) => {
 
     // deconstructing from json so all are strings
     let {title, content, languages, userid, imgurl} = req.body;
+    console.log(req.body)
 
     await db.posts.create({title, content, languages, userid, imgurl})
     
