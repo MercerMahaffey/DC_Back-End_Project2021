@@ -37,7 +37,7 @@ let printPost = async (allPostsData) => {
                         <div class="card-body p-0 d-flex">
                             <figure class="avatar me-3"><img src="https://via.placeholder.com/50x50.png" alt="image" class="shadow-sm rounded-circle w45"></figure>
                             
-                            <h4 id="nameArea" class="fw-700 text-grey-900 font-xssss mt-1">${user.username}<span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">${post.createdAt.substring(0,10)}</span></h4>
+                            <h4 id="nameArea" class="fw-700 text-grey-900 font-xssss mt-1">${user.username}<span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">${post.createdAt.substring(0,16)}</span></h4>
                             <a href="#" class="ms-auto"></a>
                         </div>
                         <div class="card-body p-0 me-lg-5">
