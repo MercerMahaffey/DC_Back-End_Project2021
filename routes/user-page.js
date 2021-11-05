@@ -48,7 +48,6 @@ router.get('/users', async (req, res) => {
 
 router.get("/user_posts", async (req, res) => {
     let userid = req.session.passport.user;
-    console.log("user_posts")
     let postRecords = await grabPosts(userid);
 
     // first array is user, second array is post of that user
@@ -59,7 +58,7 @@ router.get("/user_posts", async (req, res) => {
     res.json(postRecords);
 })
 
-router.post("/user_posts", async (req, res) => {
+router.post("/user_posts", async (req, res, next) => {
     
     console.log("*** inside user_posts on backend ***");
     
@@ -74,14 +73,10 @@ router.post("/user_posts", async (req, res) => {
             console.log(`An error has occurred: ${err}`);
             next()
         }
-        console.log(`filepath: ${files.upload.filepath}`);
         console.log(`title: ${fields.title}`);
         console.log(`content: ${fields.content}`);
-        console.log(`files: ${files}`);
         // upload image to cloudinary and create post entry in db
-        console.log("right outside of cloudinary");
         cloudinary.uploader.upload(files.upload.filepath, async (err, result) => {
-            console.log("inside cloudinary");
             if(err){
                 console.log(`An error has occurred: ${err}`);
                 next()
@@ -97,7 +92,6 @@ router.post("/user_posts", async (req, res) => {
         })
         // deletes temp image file in files folder
         fs.unlinkSync(files.upload.filepath)
-        console.log("after cloudinary");
     })
     res.redirect("/")
     
