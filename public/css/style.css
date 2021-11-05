@@ -48,9 +48,22 @@
 }
 
 .typeCommentArea{
-  width: 1150px;
+  width: 900px;
   height: 50px;
   border-radius: 10px;
+  color: black;
+  /* padding-left: 10px; */
+  border-color: white;
+  border-style: none;
+}
+.commentSubmitButton{
+  height: 40px;
+  border-radius: 10px;
+  width: 80px;
+  background-color: grey;
+  color: white;
+  border-style: none;
+  margin-bottom: 10px;
 }
 
 
@@ -135,8 +148,14 @@
   visibility: visible;
   overflow: visible;
   height: 100%;
-  width: 1900px;
+  width: 1500px;
 }
+/* @media (min-width: 1200px) {
+  .feed-body{
+    width: 2000px;
+  }
+} */
+
 
 .theme-dark {
   background-color: #1a2236;
@@ -1065,7 +1084,7 @@
 }
 
 .font-xssss {
-  font-size: 12px !important;
+  font-size: 16px !important;
 }
 
 .font-xsss {
