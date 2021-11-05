@@ -1,4 +1,5 @@
 
+let form = document.getElementById('postSubmit')
 let appendHere = document.querySelector('#appendHere');
 let commentSubmit = document.querySelector('#commentSubmit')
 
