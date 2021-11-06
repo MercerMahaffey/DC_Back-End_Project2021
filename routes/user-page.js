@@ -81,8 +81,8 @@ router.post("/user_posts", async (req, res, next) => {
                 console.log(`An error has occurred: ${err}`);
                 next()
             }
-            console.log(result);
-            console.log(result.secure_url);
+            console.log(`result: ${result}`);
+            console.log(`result.secure_url: ${result.secure_url}`);
             if(fields.content){
                 await db.posts.create({title: fields.title, content: fields.content, languages: "javascript", userid: 1, imgurl: result.secure_url})
             }
@@ -93,7 +93,7 @@ router.post("/user_posts", async (req, res, next) => {
         // deletes temp image file in files folder
         fs.unlinkSync(files.upload.filepath)
     })
-    res.redirect("/")
+    res.redirect("/") // currently the homepages loads before the db is updated with the new post. use setTimeout to fix???
     
     // // grab title, content, languages, userid, imgurl from body parser
     // let {title, content, languages, userid, imgurl} = req.body
