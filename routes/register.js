@@ -22,14 +22,15 @@ router.post('/register', async (req, res) => {
             email, 
             password, 
             roleName: 'Basic',
-            languages: null,
-            github: null
+            languages: "",
+            github: "",
+            userimage: ""
         })
 
         res.redirect('/login')
     }
     catch(err){
-        res.render('registration', {
+        res.render('register', {
             err
         })
     }

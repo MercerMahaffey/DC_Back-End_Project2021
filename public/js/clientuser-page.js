@@ -4,9 +4,17 @@ let commentSubmit = document.querySelector('#commentSubmit')
 let photoUpload = document.querySelector("#photoUpload") // input tag to upload photo
 let createPhotoUserButton = document.querySelector("#createPhotoUserButton") // div tag Photo Button
 
-createPhotoUserButton.addEventListener("click", () => {
-    console.log('working');
-    photoUpload.click()
+// createPhotoUserButton.addEventListener("click", () => {
+//     console.log('working');
+//     photoUpload.click()
+// })
+
+appendHere.addEventListener('click', (e) => {
+    
+    if(e.target.id == "createPhotoUserButton"){
+        console.log('working');
+        photoUpload.click()
+    }
 })
 
 let grabPost = async () => {
