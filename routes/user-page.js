@@ -76,6 +76,7 @@ router.post("/user_posts", async (req, res, next) => {
         console.log(`title: ${fields.title}`);
         console.log(`content: ${fields.content}`);
         // upload image to cloudinary and create post entry in db
+        // todo if() make if statement so cloudinary code doesn't run when no photo is on post
         cloudinary.uploader.upload(files.upload.filepath, async (err, result) => {
             if(err){
                 console.log(`An error has occurred: ${err}`);
@@ -92,8 +93,9 @@ router.post("/user_posts", async (req, res, next) => {
         })
         // deletes temp image file in files folder
         fs.unlinkSync(files.upload.filepath)
+        console.log(req.session.passport.user)
     })
-    res.redirect("/") // currently the homepages loads before the db is updated with the new post. use setTimeout to fix???
+    setTimeout(redirectHomePage, 0, res) // currently the homepages loads before the db is updated with the new post. use setTimeout to fix???
     
     // // grab title, content, languages, userid, imgurl from body parser
     // let {title, content, languages, userid, imgurl} = req.body
@@ -113,5 +115,8 @@ router.post("/user_posts", async (req, res, next) => {
     // res.json(userPosts)
 })
 
+const redirectHomePage = (res) => {
+    res.redirect("/")
+}
 
 module.exports = router;
