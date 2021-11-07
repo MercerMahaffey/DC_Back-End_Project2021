@@ -258,10 +258,19 @@
                                 </div>
                             </div> -->
 
-                            <!-- CREATE POST -->
-                            <div id="appendHere" class="col-xl-12 col-xxl-11 col-lg-12">
                             
 
+                            <!-- FEED -->
+                            <div id="appendHere" class="col-xl-12 col-xxl-11 col-lg-12">
+
+
+                                <!-- WELCOME BANNER -->
+                                <div class="bannerContainer">
+                                    <div class="welcomeBanner"><b><em>Welcome, Today Is: </em></b></div>
+                                    <p> <span class="dateTime" id="datetime" style="font-style: italic;"></span></p>
+                                </div>
+                            
+                                <!-- CREATE POST -->
                                 <div class="card w-100 shadow-xss rounded-xxl border-0 ps-4 pt-4 pe-4 pb-3 mb-3 mt-1">
                                     <div class="card-body p-0">
                                         <!-- <a href="#" class=" font-xssss fw-600 bg-info text-grey-500 card-body p-0 d-flex align-items-center"><i class="btn-round-sm font-xs text-primary feather-edit-3 me-2 bg-greylight"></i>Create Post</a> -->
@@ -1068,6 +1077,10 @@
     <script src="js/lightbox.js"></script>
     <script src="js/scripts.js"></script>
     <script src="js/clientIndex.js" ></script>
+    <script>
+        var dt = new Date();
+        document.getElementById("datetime").innerHTML = dt.toLocaleDateString();
+        </script>
     
 </body>
 
