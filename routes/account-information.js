@@ -6,13 +6,10 @@ const auth = require('../auth/index');
 
 router.get('/account-information', auth, async (req, res) => {
     let userid = req.session.passport.user;
-    let userRecordsRaw = await db.users.findOne({
-        where: {
-          id: userid 
-        },
-      })
-    let userRecords = userRecordsRaw.dataValues;
-    
+
+    let user = await db.users.findByPk(userid);
+    let userRecords = await user.dataValues;
+    console.log(userRecords);
     res.render('account-information', {
         userRecords
     })
