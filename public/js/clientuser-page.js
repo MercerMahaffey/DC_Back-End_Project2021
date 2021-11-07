@@ -5,6 +5,7 @@ let photoUpload = document.querySelector("#photoUpload") // input tag to upload 
 let createPhotoUserButton = document.querySelector("#createPhotoUserButton") // div tag Photo Button
 
 createPhotoUserButton.addEventListener("click", () => {
+    console.log('working');
     photoUpload.click()
 })
 
