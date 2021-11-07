@@ -22,14 +22,15 @@ router.post('/register', async (req, res) => {
             email, 
             password, 
             roleName: 'Basic',
-            languages: null,
-            github: null
+            languages: "",
+            github: "",
+            userimage: "https://res.cloudinary.com/dc-backend-project2021/image/upload/v1636327951/genericUser_gpcbds.png"
         })
 
         res.redirect('/login')
     }
     catch(err){
-        res.render('registration', {
+        res.render('register', {
             err
         })
     }
