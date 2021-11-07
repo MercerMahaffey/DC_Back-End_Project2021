@@ -91,6 +91,36 @@
   justify-content: center;
 }
 
+/* FEED BODY CSS */
+/* ####################################### */
+.feed-body {
+  visibility: hidden;
+  overflow: hidden;
+  height: 0;
+}
+
+.loaded .feed-body {
+  visibility: visible;
+  overflow: visible;
+  height: 100%;
+  width: 100%;
+  margin-left: 3px;
+  margin-top: 20px;
+}
+@media (max-width: 576px) {
+  .feed-body {
+    padding-top: 70px;
+  }
+}
+/* ############################################## */
+
+
+
+
+
+
+
+/* //################################################################# */
 
 
 .preloader {
@@ -163,23 +193,6 @@
     transform: translateX(100%) rotate(0deg);
   }
 }
-.feed-body {
-  visibility: hidden;
-  overflow: hidden;
-  height: 0;
-}
-
-.loaded .feed-body {
-  visibility: visible;
-  overflow: visible;
-  height: 100%;
-  width: 1500px;
-}
-/* @media (min-width: 1200px) {
-  .feed-body{
-    width: 2000px;
-  }
-} */
 
 
 .theme-dark {
