@@ -15,6 +15,27 @@ cloudinary.config({
     api_secret: process.env.API_SECRET
 })
 
+let grabPosts = async (userid) => {
+    let postRecords = await db.users.findAll(
+        {
+        where: {id: userid},
+        include: [{
+            model:db.posts,
+            required: true,
+            include: [{
+                model: db.comments,
+                required: false,
+                }]
+            }],
+            order: [
+                [{model: db.posts}, "id", "DESC"]
+            ]
+        }
+    )
+    console.log(postRecords);
+    return postRecords;
+}
+
 router.get('/user-page', auth, (req, res) => {
     res.render('user-page')
 })
@@ -25,7 +46,19 @@ router.get('/users', async (req, res) => {
     res.json(users)
 })
 
-router.post("/user_posts", async (req, res) => {
+router.get("/user_posts", async (req, res) => {
+    let userid = req.session.passport.user;
+    let postRecords = await grabPosts(userid);
+
+    // first array is user, second array is post of that user
+    // let languagesArray = postRecords[0].posts[0].languages.split(',');
+
+    // console.log(languagesArray);
+    res.set("Content-Security-Policy", "default-src 'self'; img-src *'");
+    res.json(postRecords);
+})
+
+router.post("/user_posts", async (req, res, next) => {
     
     console.log("*** inside user_posts on backend ***");
     
@@ -40,20 +73,16 @@ router.post("/user_posts", async (req, res) => {
             console.log(`An error has occurred: ${err}`);
             next()
         }
-        console.log(`filepath: ${files.upload.filepath}`);
         console.log(`title: ${fields.title}`);
         console.log(`content: ${fields.content}`);
-        console.log(`files: ${files}`);
         // upload image to cloudinary and create post entry in db
-        console.log("right outside of cloudinary");
         cloudinary.uploader.upload(files.upload.filepath, async (err, result) => {
-            console.log("inside cloudinary");
             if(err){
                 console.log(`An error has occurred: ${err}`);
                 next()
             }
-            console.log(result);
-            console.log(result.secure_url);
+            console.log(`result: ${result}`);
+            console.log(`result.secure_url: ${result.secure_url}`);
             if(fields.content){
                 await db.posts.create({title: fields.title, content: fields.content, languages: "javascript", userid: 1, imgurl: result.secure_url})
             }
@@ -63,9 +92,8 @@ router.post("/user_posts", async (req, res) => {
         })
         // deletes temp image file in files folder
         fs.unlinkSync(files.upload.filepath)
-        console.log("after cloudinary");
     })
-    res.redirect("/")
+    res.redirect("/") // currently the homepages loads before the db is updated with the new post. use setTimeout to fix???
     
     // // grab title, content, languages, userid, imgurl from body parser
     // let {title, content, languages, userid, imgurl} = req.body
