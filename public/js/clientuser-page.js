@@ -10,7 +10,7 @@ let createPhotoUserButton = document.querySelector("#createPhotoUserButton") // 
 // })
 
 appendHere.addEventListener('click', (e) => {
-
+    
     if(e.target.id == "createPhotoUserButton"){
         console.log('working');
         photoUpload.click()

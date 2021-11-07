@@ -21,7 +21,10 @@ module.exports = {
         type: Sequelize.STRING
       },
       languages: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+      },
+      userimage: {
+        type: Sequelize.STRING,
       },
       roleName: {
         type: Sequelize.STRING
