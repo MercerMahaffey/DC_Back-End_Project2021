@@ -7,7 +7,7 @@ let htmlCheck = document.querySelector('#htmlCheck');
 let cssCheck = document.querySelector('#cssCheck');
 
 submitUserInfoButton.addEventListener('click', async (e) => {
-    
+    console.log('sending');
     let username = usernameText.value;
     let email = emailText.value;
     let github = githubText.value;
