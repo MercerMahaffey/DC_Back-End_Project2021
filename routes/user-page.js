@@ -97,9 +97,23 @@ router.post("/user_posts", (req, res, next) => {
                 next()
                 return
             }
+            let languages = '';
+            if(fields.javascript){
+                languages += "javascript, "
+            }
+            if(fields.html){
+                languages += "html, "
+            }
+            if(fields.css){
+                languages += "css, "
+            }
+            if(languages == ''){
+                languages = 'english, '
+            }
+            languages = languages.substring(0, languages.length-2)
             console.log("reading");
             console.log(`result.secure_url: ${result.secure_url}`);
-            await db.posts.create({title: fields.title, content: fields.content, languages: "javascript", userid: userid, imgurl: result.secure_url})
+            await db.posts.create({title: fields.title, content: fields.content, languages, userid: userid, imgurl: result.secure_url})
             console.log("inside cloudinary IF-STATEMENT")
             
             res.redirect("/user-page")
