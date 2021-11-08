@@ -245,7 +245,7 @@
                                         <input id="submitProfilePhoto" type="submit">
                                     </form>
                                     <h2 class="fw-700 font-sm text-grey-900 mt-3"><%= userRecords.username %> </h2>
-                                    <hr>
+                                    <hr class="darkText">
                                     <!-- <h4 class="text-grey-500 fw-500 mb-3 font-xsss mb-4">Brooklyn</h4>     -->
                                     <!-- <a href="#" class="p-3 alert-primary text-primary font-xsss fw-500 mt-2 rounded-3">Upload New Photo</a> -->
                                 </div>
@@ -257,14 +257,14 @@
                                     <div class="col-lg-6 mb-3">
                                         <div class="form-group">
                                             <label class="mont-font fw-600 font-xsss">Username</label>
-                                            <input id="usernameText" name="usernameText" type="text" class="form-control" placeholder="<%= userRecords.username %>"> 
+                                            <input id="usernameText" name="usernameText" type="text" class="form-control darkText" placeholder="<%= userRecords.username %>"> 
                                         </div>        
                                     </div>
 
                                     <div class="col-lg-6 mb-3">
                                         <div class="form-group">
                                             <label class="mont-font fw-600 font-xsss">Email</label>
-                                            <input id="emailText" name="emailText" type="text" class="form-control" placeholder="<%=userRecords.email%>"> 
+                                            <input id="emailText" name="emailText" type="text" class="form-control darkText" placeholder="<%=userRecords.email%>"> 
                                         </div>        
                                     </div>
                                 </div>
@@ -273,13 +273,13 @@
                                     <div class="col-lg-12 mb-3">
                                         <div class="form-group">
                                             <label class="mont-font fw-600 font-xsss">Github</label>
-                                            <input id="githubText" name="githubText" type="text" class="form-control" placeholder="<%= userRecords.github %>">  
+                                            <input id="githubText" name="githubText" type="text" class="form-control darkText" placeholder="<%= userRecords.github %>">  
                                             
                                         </div>        
                                     </div>
 
                                     <div class="col-lg-12 mb-3">
-                                        <div class="form-group">
+                                        <div class="form-group darkText">
                                             <label class="mont-font fw-600 font-xsss">Languages: </label>
                                             <% if (userRecords.languages.search('javascript') !== -1) { %>
                                                 <span> Javascript  </span><input type="checkbox" checked="True" name="javascript" id="javascriptCheck"> 
@@ -319,17 +319,17 @@
                                         <textarea id="descriptionText" name="descriptionText" class="form-control mb-0 p-3 h100 bg-greylight lh-16" rows="5" placeholder="Write your message..." spellcheck="false"></textarea>
                                     </div> -->
 
-                                    <div class="col-lg-12">
-                                        <div id="submitUserInfoButton" style="cursor: pointer;" class="bg-current text-center text-white font-xsss fw-600 p-3 w175 rounded-3 d-inline-block">Save</div>
-                                    </div>
                                     <h4 class="d-inline font-xssss mont-font fw-700">Dark Mode</h4>
-                                    <div class="d-inline float-right mt-1">
+                                    <div class="d-inline mt-1" style="margin-left: 25px;">
                                         <% if (userRecords.darkMode) { %>
                                             <label id="darkModeToggle" class="toggle toggle-dark"><input type="checkbox" checked><span class="toggle-icon"></span></label>
                                         <% } else { %>
                                             <label id="darkModeToggle" class="toggle toggle-dark"><input type="checkbox"><span class="toggle-icon"></span></label>
                                         <% } %>
                                         
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div id="submitUserInfoButton" style="cursor: pointer; margin-top: 20px;" class="bg-current text-center text-white font-xsss fw-600 p-3 w175 rounded-3 d-inline-block">Save</div>
                                     </div>
                                 </div>
 
