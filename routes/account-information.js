@@ -45,7 +45,6 @@ router.put('/update-account', async (req, res) => {
 
 router.post("/update-account", (req, res) => {
     let userid = req.session.passport.user;
-    console.log(`userid = ${userid}`);
     console.log("*** inside update-account post route on backend ***")
     
     // using formidable to grab encrypted data from the form
@@ -70,7 +69,6 @@ router.post("/update-account", (req, res) => {
             console.log(`result.secure_url: ${result.secure_url}`);
             await db.users.update({userimage: result.secure_url}, {where: {id: userid}})
             let response = await db.users.findByPk(userid)
-            console.log(response);
             res.redirect("/account-information")
         })
         // deletes temp image file in files folder
