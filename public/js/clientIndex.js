@@ -18,8 +18,11 @@ let printPost = async (allPostsData) => {
     // console.log("printing post");
     let usersArrayRaw = await fetch('/username');
     let usersArray = await usersArrayRaw.json();
-    console.log(usersArray);
     // console.log(usersArray);
+    // console.log(usersArray);
+    let useridRaw = await fetch('/userid');
+    let userid = await useridRaw.json();
+    // console.log(userid);
     let htmlBlock = '';
     // let allUsers = JSON.stringify(allPostsData)
     allPostsData.forEach(user => {
@@ -48,7 +51,14 @@ let printPost = async (allPostsData) => {
                 usersArray.forEach(usersArrayUser => {
                     if(usersArrayUser.id === comment.userid){
                         commentName = usersArrayUser.username;
-                        commentsHtmlBlock += `<div style="color: black;" ><span style="font-weight: bold; font-size: 20px;">${commentName}: </span>${comment.content}</div> <br>`
+                        // if same user as logged in
+                        if(userid === comment.userid){
+                            commentsHtmlBlock += `<div id="${comment.id}" style="color: black;" ><span id="deleteComment" class="btn btn-danger">Delete</span><span style="font-weight: bold; font-size: 20px;"> ${commentName}: </span>${comment.content}</div> <br>`
+                        }
+                        else{
+                            commentsHtmlBlock += `<div id="${comment.id}" style="color: black;" ><span style="font-weight: bold; font-size: 20px;">${commentName}: </span>${comment.content}</div> <br>`
+                        }
+                        
                     }
                     
                 })
@@ -65,7 +75,43 @@ let printPost = async (allPostsData) => {
             })
             
             // console.log(commentsHtmlBlock);
+            //if the post contains an image
             if(post.imgurl){
+                // console.log(post.userid);
+                // if users post
+                if(post.userid === userid){
+                    // console.log("same user");
+                    htmlBlock += `<div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-0">
+                            <div id="${post.id}" class="card-body p-0 d-flex">
+                            <figure class="avatar me-3"><img src="${userImage}" alt="image" class="shadow-sm rounded-circle w45"></figure>
+                            
+                            <h4 id="nameArea" class="fw-700 text-grey-900 font-xssss mt-1">${user.username}<span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">${post.createdAt.substring(0,10)} ${post.createdAt.substring(11,16)}</span></h4>
+                            <a href="#" class="ms-auto"></a>
+                            <h4 id="deletePost" class="btn btn-danger" >Delete Post</h4>
+                        </div>
+                        <div class="card-body p-0 me-lg-5">
+                            <h1>${post.title}</h1>
+                            <p class="fw-500 lh-26 font-xssss w-100 mb-2">${post.content}</p>
+                        </div>
+                        <div class="card-body d-block p-0 mb-3">
+                            <div class="row ps-2 pe-2">
+                                
+                                <div class="col-sm-12 p-1"><a href="${post.imgurl}" data-lightbox="roadtr"><img src="${post.imgurl}" class="rounded-3 w-100" alt="image"></a></div>                                        
+                            </div>
+                        </div>
+                        <form class="${user.id}" action="/comments/${post.id}" method="post">
+                            <input class="typeCommentArea" type="text" placeholder="Add a comment." name="content"></input>
+
+                            <div>
+                                <button class="commentSubmitButton" id="commentSubmit" type="submit">Post</button>
+                            </div>
+                        </form>
+                        <div id="${post.id}" class="commentSection card-body d-flex p-0">
+                            
+                            
+                            <a  style="cursor:pointer;" class="d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss"><i id="commentButton" class="feather-message-circle text-dark text-grey-900 btn-round-sm font-lg"></i><span id="commentButton" class="d-none-xss">${post.comments.length} Comments.</span></a><div id="comments" class="visually-hidden">` + commentsHtmlBlock + `</div></div></div><br></br>`
+                }
+                else{
             htmlBlock += `<div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-0">
                         <div class="card-body p-0 d-flex">
                             <figure class="avatar me-3"><img src="${userImage}" alt="image" class="shadow-sm rounded-circle w45"></figure>
@@ -94,8 +140,40 @@ let printPost = async (allPostsData) => {
                             
                             
                             <a  style="cursor:pointer;" class="d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss"><i id="commentButton" class="feather-message-circle text-dark text-grey-900 btn-round-sm font-lg"></i><span id="commentButton" class="d-none-xss">${post.comments.length} Comments.</span></a><div id="comments" class="visually-hidden">` + commentsHtmlBlock + `</div></div></div><br></br>`
+                }
             }
+            // no picture
             else{
+                // if users post
+                if(post.userid === userid){
+                    // console.log("same user");
+                    htmlBlock += `<div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-0">
+                        <div id="${post.id}" class="card-body p-0 d-flex">
+                            <figure class="avatar me-3"><img src="${userImage}" alt="image" class="shadow-sm rounded-circle w45"></figure>
+                            
+                            <h4 id="nameArea" class="fw-700 text-grey-900 font-xssss mt-1">${user.username}<span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">${post.createdAt.substring(0,10)} ${post.createdAt.substring(11,16)}</span></h4>
+                            <a href="#" class="ms-auto"></a>
+                            <h4 id="deletePost" class="btn btn-danger" >Delete Post</h4>
+                        </div>
+                        <div class="card-body p-0 me-lg-5">
+                            <h1>${post.title}</h1>
+                            <p class="fw-500 lh-26 font-xssss w-100 mb-2">${post.content}</p>
+                        </div>
+                        
+                        <form class="${user.id}" action="/comments/${post.id}" method="post">
+                            <input class="typeCommentArea" type="text" placeholder="Add a comment." name="content"></input>
+
+                            <div>
+                                <button class="commentSubmitButton" id="commentSubmit" type="submit">Post</button>
+                            </div>
+                        </form>
+                        <div id="${post.id}" class="commentSection card-body d-flex p-0">
+                            
+                            
+                            <a  style="cursor:pointer;" class="d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss"><i id="commentButton" class="feather-message-circle text-dark text-grey-900 btn-round-sm font-lg"></i><span id="commentButton" class="d-none-xss">${post.comments.length} Comments.</span></a><div id="comments" class="visually-hidden">` + commentsHtmlBlock + `</div></div></div><br></br>`
+                }
+                // if not users post
+                else{
                 htmlBlock += `<div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-0">
                         <div class="card-body p-0 d-flex">
                             <figure class="avatar me-3"><img src="${userImage}" alt="image" class="shadow-sm rounded-circle w45"></figure>
@@ -119,6 +197,7 @@ let printPost = async (allPostsData) => {
                             
                             
                             <a  style="cursor:pointer;" class="d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss"><i id="commentButton" class="feather-message-circle text-dark text-grey-900 btn-round-sm font-lg"></i><span id="commentButton" class="d-none-xss">${post.comments.length} Comments.</span></a><div id="comments" class="visually-hidden">` + commentsHtmlBlock + `</div></div></div><br></br>`
+                }
             }
 
 
@@ -153,15 +232,13 @@ appendHere.addEventListener('click', async (e) =>{
     //     }
     //     console.log(newPost);
     
-    //     let results = await fetch('/posts', {
-    //         method: "POST",
-    //         headers: { "Content-type": "application/json; charset=UTF-8" },
-    //         body: JSON.stringify(newPost)
-    //     })
+        fetch('/posts', {
+            method: "POST",
+            headers: { "Content-type": "application/json; charset=UTF-8" },
+            body: JSON.stringify(newPost)
+        })
     
-    //     let posts = await results.json()
-    //     grabPost()
-    // }
+        location.reload();
     if(e.target.id ==="commentButton"){
         // console.log(e.target.parentElement.parentElement.childNodes[2])
         if (e.target.parentElement.parentElement.childNodes[2].className === "none"){
@@ -174,6 +251,28 @@ appendHere.addEventListener('click', async (e) =>{
     if(e.target.id === "commentSubmit"){
         // e.preventDefault();
 
+    }
+    if(e.target.id ==="deletePost"){
+        let postid = e.target.parentElement.id;
+        // console.log(e.target.parentElement.id);
+        // console.log("deleting post");
+        fetch(`/posts/deletepost/${postid}`,{
+            method: "DELETE"})
+        // let posts = await results.json()
+        // console.log('running after fetch');
+        location.reload();
+        // grabPost()
+    }
+    if(e.target.id ==="deleteComment"){
+        let commentid = e.target.parentElement.id;
+        // console.log(e.target.parentElement.id);
+        // console.log("deleting comment");
+        fetch(`/posts/deletecomment/${commentid}`,{
+            method: "DELETE"})
+        // let posts = await results.json()
+        // console.log('running after fetch');
+        location.reload();
+        // grabPost()
     }
 })
 // if(commentsSection.className === "visually-hidden"){
