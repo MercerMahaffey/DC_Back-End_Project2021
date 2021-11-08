@@ -12,30 +12,30 @@ Doorz is a social media web application where web developers are able to connect
 ## Team:
 
 Mercer Mahaffey
-    Primary Team Role: 
+    - Primary Team Role: 
 Devin Brock
-    Primary Team Role:
+    - Primary Team Role:
 Stephen Doty
-    Primary Team Role:
+    - Primary Team Role:
 James Ivy
-    Primary Team Role: 
+    - Primary Team Role: 
 ## Tools used to build this application:
 [Themeforest](https://themeforest.net/item/sociala-social-network-app-html-template/31502548) was used as a starter template to focus more on the functionality aspects of the website for this project.
 
-HTML
-CSS
-JavaScript 
-SQL
-bcryptjs
-cloudinary
-cookie-session
-dotenv
-ejs
-formidable
-helmet
-passport
-pg
-sequelize
+HTML,
+CSS,
+JavaScript, 
+SQL,
+bcryptjs,
+cloudinary,
+cookie-session,
+dotenv,
+ejs,
+formidable,
+helmet,
+passport,
+pg,
+sequelize,
 
 ## Basic Objectives:
 
