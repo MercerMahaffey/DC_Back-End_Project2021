@@ -12,7 +12,8 @@
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
     <!-- Custom Stylesheet -->
     <link rel="stylesheet" href="css/style.css">
-
+    <!-- Non-template Stylesheet -->
+    <link rel="stylesheet" href="css/Non-template_styles.css">
 </head>
 
 <body class="color-theme-blue mont-font">
@@ -238,7 +239,11 @@
                                 <div class="col-lg-4 text-center">
 
                                     <!-- USER INFO DISPLAY -->
-                                    <figure class="avatar ms-auto me-auto mb-0 mt-2 w100"><img src="https://via.placeholder.com/100x100.png" alt="image" class="shadow-sm rounded-3 w-100"></figure>
+                                    <form action="/update-account" enctype="multipart/form-data" method="post">
+                                        <input id="photoUpload" type="file" name="upload">
+                                        <figure class="avatar ms-auto me-auto mb-0 mt-2 w100"><img id="uploadProfilePhoto" width="100px" height="100px" src="<%= userRecords.userimage %>" alt="image" class="shadow-sm rounded-3 w-100"></figure>
+                                        <input id="submitProfilePhoto" type="submit">
+                                    </form>
                                     <h2 class="fw-700 font-sm text-grey-900 mt-3"><%= userRecords.username %> </h2>
                                     <hr>
                                     <!-- <h4 class="text-grey-500 fw-500 mb-3 font-xsss mb-4">Brooklyn</h4>     -->

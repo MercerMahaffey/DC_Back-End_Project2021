@@ -2,7 +2,13 @@
 let appendHere = document.querySelector('#appendHere');
 let commentSubmit = document.querySelector('#commentSubmit')
 
-
+appendHere.addEventListener('click', (e) => {
+    
+    if(e.target.id == "createPhotoUserButton"){
+        console.log('working');
+        photoUpload.click()
+    }
+})
 
 let grabPost = async () => {
     let response = await fetch('/posts');
@@ -20,12 +26,19 @@ let printPost = async (allPostsData) => {
     let usersArrayRaw = await fetch('/username');
     let usersArray = await usersArrayRaw.json();
     // console.log(usersArray);
-    // console.log(usersArray);
     let htmlBlock = '';
     // let allUsers = JSON.stringify(allPostsData)
     allPostsData.forEach(user => {
         let userPosts = user.posts;
+        
         userPosts.forEach(post => {
+            let userImage = '';
+            usersArray.forEach(usersArrayUser => {
+                if(usersArrayUser.id == post.userid){
+                    userImage = usersArrayUser.userimage
+                    
+                }
+            });
             let postComments = post.comments;
             let commentsHtmlBlock = '';
             // console.log(postComments);
@@ -38,10 +51,11 @@ let printPost = async (allPostsData) => {
                 // let commentName = '';
                 // console.log(allPostsData);
                 let commentName = 'noName';
-                usersArray.forEach(user => {
-                    if(user.id === comment.userid){
+                usersArray.forEach(usersArrayUser => {
+                    if(usersArrayUser.id === comment.userid){
                         commentName = user.username;
                     }
+                    
                 })
                 
                     // console.log(usersArray[comment.userid-1]);
@@ -59,7 +73,7 @@ let printPost = async (allPostsData) => {
             if(post.imgurl){
             htmlBlock += `<div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-0">
                         <div class="card-body p-0 d-flex">
-                            <figure class="avatar me-3"><img src="https://via.placeholder.com/50x50.png" alt="image" class="shadow-sm rounded-circle w45"></figure>
+                            <figure class="avatar me-3"><img src="${userImage}" alt="image" class="shadow-sm rounded-circle w45"></figure>
                             
                             <h4 id="nameArea" class="fw-700 text-grey-900 font-xssss mt-1">${user.username}<span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">${post.createdAt.substring(0,10)} ${post.createdAt.substring(11,16)}</span></h4>
                             <a href="#" class="ms-auto"></a>
@@ -89,7 +103,7 @@ let printPost = async (allPostsData) => {
             else{
                 htmlBlock += `<div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-0">
                         <div class="card-body p-0 d-flex">
-                            <figure class="avatar me-3"><img src="https://via.placeholder.com/50x50.png" alt="image" class="shadow-sm rounded-circle w45"></figure>
+                            <figure class="avatar me-3"><img src="${userImage}" alt="image" class="shadow-sm rounded-circle w45"></figure>
                             
                             <h4 id="nameArea" class="fw-700 text-grey-900 font-xssss mt-1">${user.username}<span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">${post.createdAt.substring(0,10)} ${post.createdAt.substring(11,16)}</span></h4>
                             <a href="#" class="ms-auto"></a>
