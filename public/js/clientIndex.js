@@ -96,7 +96,7 @@ let printPost = async (allPostsData) => {
                             
                             <h4 id="nameArea" class="fw-700 text-grey-900 font-xssss mt-1">${user.username}<span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">${post.createdAt.substring(0,10)} ${post.createdAt.substring(11,16)}</span></h4>
                             <a href="#" class="ms-auto"></a>
-                            <h4 id="deletePost" class="btn btn-danger" >Delete Post</h4>
+                            <h4 id="deletePost" class="btn btn-danger" style="height: 40px;" >Delete Post</h4>
                         </div>
                         <div class="card-body p-0 me-lg-5">
                             <h5 class="text-danger">${post.languages}</h5>

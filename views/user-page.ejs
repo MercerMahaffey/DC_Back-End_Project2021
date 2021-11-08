@@ -177,16 +177,19 @@
                             <form action="/user_posts" enctype="multipart/form-data" method="post">
                                 <div class="card-body p-0 mt-0 position-relative">
                                     <input type="text" name="title" id="post-title" class="bor-0 w-100 rounded-xxl p-2 ps-2 font-xssss fw-500 border-light-md theme-dark-bg" cols="30" rows="10" placeholder="Post Title"></input>
+                                    <span class="darkText"> Javascript  </span><input type="checkbox" name="javascript" id="javascriptCheck">
+                                    <span class="darkText"> html  </span><input type="checkbox" name="html" id="htmlCheck">
+                                    <span class="darkText"> css  </span><input type="checkbox" name="css" id="cssCheck">
                                 </div>
                                 <div class="card-body p-0 mt-3 position-relative">
                                     <figure class="avatar position-absolute ms-2 mt-1 top-5"><img src="<%= userRecords.userimage %>" alt="image" class="shadow-sm rounded-circle w30"></figure>
-                                    <textarea type="text" name="content" id="post-message" class="h100 bor-0 w-100 rounded-xxl p-2 ps-5 font-xssss fw-500 border-light-md theme-dark-bg" cols="30" rows="10" placeholder="What's on your mind?"></textarea>
+                                    <textarea type="text" name="content" id="post-message" class="darkText h100 bor-0 w-100 rounded-xxl p-2 ps-5 font-xssss fw-500 border-light-md theme-dark-bg" cols="30" rows="10" placeholder="What's on your mind?"></textarea>
                                 </div>
                                 <div class="card-body d-flex p-0 mt-0">
                                     <!-- <a href="#" class="d-flex align-items-center font-xssss fw-600 ls-1 text-grey-700 text-dark pe-4"><i class="font-md text-danger feather-video me-2"></i><span class="d-none-xs">Live Video</span></a> -->
                                 <!-- <a class="d-flex align-items-center font-xssss fw-600 ls-1 text-grey-700 text-dark pe-4"><span class="d-none-xs">Photo</span></a> -->
                                 <button id="createPostUserButton" class="btn btn-primary text-white" type="submit">Create Post</button>&nbsp;
-                                <input id="photoUploadUserPost" class="inputTagPhoto" type="file" name="upload" accept="images/*" capture="user">
+                                <input class="darkText" style="margin-top: 3px; margin-left: 3px;" id="photoUploadUserPost" class="inputTagPhoto" type="file" name="upload" accept="images/*" capture="user">
                                 <!-- <label class="btn btn-danger" for="photoUploadUserPost">Photo</label> -->
                                 
                                 <!-- <div class="input-group">
