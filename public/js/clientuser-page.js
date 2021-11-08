@@ -71,7 +71,7 @@ let printPost = async (allPostsData) => {
                 
                 // let commentName = allPostsData[comment.userid-1].username;
                 // console.log(commentName);
-                
+                commentsHtmlBlock += `<div class="darkText" ><span style="font-weight: bold; font-size: 20px;">${commentName}: </span>${comment.content}</div> <br>`
             })
             
             // console.log(commentsHtmlBlock);
