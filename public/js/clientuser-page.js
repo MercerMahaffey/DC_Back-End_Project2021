@@ -2,13 +2,6 @@
 let appendHere = document.querySelector('#appendHere');
 let commentSubmit = document.querySelector('#commentSubmit')
 
-
-appendHere.addEventListener("click", (e) => {
-    if(e.target.id === "photoUploadUserPost"){
-        console.log("clicked photoUploadUserPost")
-    }
-})
-
 let grabPost = async () => {
     let response = await fetch('/user_posts');
     // console.log("grabbing post");

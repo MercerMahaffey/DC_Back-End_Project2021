@@ -165,7 +165,7 @@ router.post("/posts", async (req, res, next) => {
     let uploadFolder = path.join(__dirname, "../public", "files")
     form.uploadDir = uploadFolder
     console.log("top test")
-    form.parse(req, (err, fields, files) => {
+    form.parse(req, async (err, fields, files) => {
         if(err){
             console.log(`An error has occurred inside of form.parse(): ${err}`);
             next()
@@ -177,7 +177,7 @@ router.post("/posts", async (req, res, next) => {
         console.log(`title: ${fields.title}`);
         console.log(`content: ${fields.content}`);
         console.log(`userid: ${userid}`);
-        cloudinary.uploader.upload(files.upload.filepath, async (err, result) => {
+        await cloudinary.uploader.upload(files.upload.filepath, async (err, result) => {
             console.log("inside cloudinary")
             console.log(files.upload.filepath);
             if(err){
@@ -185,6 +185,7 @@ router.post("/posts", async (req, res, next) => {
                 next()
                 return
             }
+            console.log("reading");
             console.log(`result: ${result}`);
             console.log(`result.secure_url: ${result.secure_url}`);
             await db.posts.create({title: fields.title, content: fields.content, languages: "javascript", userid: userid, imgurl: result.secure_url})
@@ -193,6 +194,7 @@ router.post("/posts", async (req, res, next) => {
             res.redirect("/")
         })
         // deletes temp image file in files folder
+        console.log("deleting");
         fs.unlinkSync(files.upload.filepath)
         console.log("bottom inside form")
     })

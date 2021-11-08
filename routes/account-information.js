@@ -53,7 +53,7 @@ router.post("/update-account", (req, res, next) => {
     // gives filepath to house temp image file
     let uploadFolder = path.join(__dirname, "../public", "files")
     form.uploadDir = uploadFolder
-    form.parse(req, (err, fields, files) => {
+    form.parse(req, async (err, fields, files) => {
         if(err){
             console.log(`An error has occurred: ${err}`);
             next()
@@ -61,17 +61,19 @@ router.post("/update-account", (req, res, next) => {
         }
         console.log(files);
         // upload image to cloudinary and create post entry in db
-        cloudinary.uploader.upload(files.upload.filepath, async (err, result) => {
+        await cloudinary.uploader.upload(files.upload.filepath, async (err, result) => {
             if(err){
                 console.log(`An error has occurred: ${err}`);
                 next()
             }
+            console.log("reading");
             console.log(`result: ${result}`);
             console.log(`result.secure_url: ${result.secure_url}`);
             await db.users.update({userimage: result.secure_url}, {where: {id: userid}})
             res.redirect("/account-information")
         })
         // deletes temp image file in files folder
+        console.log("deleting");
         fs.unlinkSync(files.upload.filepath)
     })
 })
