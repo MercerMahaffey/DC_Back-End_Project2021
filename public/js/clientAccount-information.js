@@ -8,6 +8,7 @@ let cssCheck = document.querySelector('#cssCheck');
 let uploadProfilePhoto = document.querySelector("#uploadProfilePhoto")
 let photoUploadUserProfile = document.querySelector("#photoUploadUserProfile") // input tag to upload photo
 let submitProfilePhoto = document.querySelector("#submitProfilePhoto")
+let darkModeToggle = document.querySelector("#darkModeToggle")
 
 uploadProfilePhoto.addEventListener("click", () => {
     console.log('working');
@@ -20,7 +21,7 @@ photoUploadUserProfile.addEventListener("change", () => {
 
 
 submitUserInfoButton.addEventListener('click', async (e) => {
-    console.log('sending');
+    // console.log('sending');
     let username = usernameText.value;
     let email = emailText.value;
     let github = githubText.value;

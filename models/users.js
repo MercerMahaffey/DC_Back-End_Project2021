@@ -23,7 +23,8 @@ module.exports = (sequelize, DataTypes) => {
     github: DataTypes.STRING,
     languages: DataTypes.STRING,
     userimage: DataTypes.STRING,
-    roleName: DataTypes.STRING
+    roleName: DataTypes.STRING,
+    darkMode: DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'users',

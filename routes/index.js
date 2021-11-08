@@ -14,9 +14,16 @@ cloudinary.config({
     api_secret: process.env.API_SECRET
 })
 
-router.get('/', auth, (req, res) => {
-    console.log(req.session.passport.user);
-    res.render('index')
+router.get('/', auth, async (req, res) => {
+    let userid = req.session.passport.user;
+    
+    let user = await db.users.findByPk(userid);
+    let userRecords = await user.dataValues;
+    console.log(userRecords);
+    
+    res.render('index', {
+        userRecords
+    })
 })
 router.get('/userid', auth, (req, res) => {
     let userid = req.session.passport.user;
