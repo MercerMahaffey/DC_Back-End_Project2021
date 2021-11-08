@@ -90,6 +90,7 @@ let printPost = async (allPostsData) => {
                             <h4 id="deletePost" class="btn btn-danger" >Delete Post</h4>
                         </div>
                         <div class="card-body p-0 me-lg-5">
+                            <h5 class="text-danger">${post.languages}</h5>
                             <h1>${post.title}</h1>
                             <p class="fw-500 lh-26 font-xssss w-100 mb-2">${post.content}</p>
                         </div>
@@ -120,6 +121,7 @@ let printPost = async (allPostsData) => {
                             <a href="#" class="ms-auto"></a>
                         </div>
                         <div class="card-body p-0 me-lg-5">
+                            <h5 class="text-danger">${post.languages}</h5>
                             <h1>${post.title}</h1>
                             <p class="fw-500 lh-26 font-xssss w-100 mb-2">${post.content}</p>
                         </div>
@@ -156,6 +158,7 @@ let printPost = async (allPostsData) => {
                             <h4 id="deletePost" class="btn btn-danger" >Delete Post</h4>
                         </div>
                         <div class="card-body p-0 me-lg-5">
+                            <h5 class="text-danger">${post.languages}</h5>
                             <h1>${post.title}</h1>
                             <p class="fw-500 lh-26 font-xssss w-100 mb-2">${post.content}</p>
                         </div>
@@ -182,6 +185,7 @@ let printPost = async (allPostsData) => {
                             <a href="#" class="ms-auto"></a>
                         </div>
                         <div class="card-body p-0 me-lg-5">
+                            <h5 class="text-danger">${post.languages}</h5>
                             <h1>${post.title}</h1>
                             <p class="fw-500 lh-26 font-xssss w-100 mb-2">${post.content}</p>
                         </div>
@@ -232,14 +236,15 @@ appendHere.addEventListener('click', async (e) =>{
     //     }
     //     console.log(newPost);
     
-        fetch('/posts', {
-            method: "POST",
-            headers: { "Content-type": "application/json; charset=UTF-8" },
-            body: JSON.stringify(newPost)
-        })
+        // fetch('/posts', {
+        //     method: "POST",
+        //     headers: { "Content-type": "application/json; charset=UTF-8" },
+        //     body: JSON.stringify(newPost)
+        // })
     
-        location.reload();
+        // location.reload();
     if(e.target.id ==="commentButton"){
+        // console.log('clicking button');
         // console.log(e.target.parentElement.parentElement.childNodes[2])
         if (e.target.parentElement.parentElement.childNodes[2].className === "none"){
             e.target.parentElement.parentElement.childNodes[2].className = "visually-hidden"

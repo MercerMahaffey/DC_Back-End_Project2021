@@ -68,11 +68,11 @@
 
                     <!-- PAGE CUSTOMIZATION SETTINGS -->
                     <!-- <h4 class="fw-700 font-sm mb-4">Settings</h4>
-                    <h6 class="font-xssss text-grey-500 fw-700 mb-3 d-block">Choose Color Theme</h6>
-                    <ul>
+                    <h6 class="font-xssss text-grey-500 fw-700 mb-3 d-block">Choose Color Theme</h6> -->
+                    <ul class="visually-hidden">
                         <li>
                             <label class="item-radio item-content">
-                                <input type="radio" name="color-radio" value="red" checked=""><i class="ti-check"></i>
+                                <input type="radio" name="color-radio" value="red" checked><i class="ti-check"></i>
                                 <span class="circle-color bg-red" style="background-color: #ff3b30;"></span>
                             </label>
                         </li>
@@ -145,7 +145,7 @@
                         </li>
                     </ul>
                     
-                    <div class="card bg-transparent-card border-0 d-block mt-3">
+                    <!-- <div class="card bg-transparent-card border-0 d-block mt-3">
                         <h4 class="d-inline font-xssss mont-font fw-700">Header Background</h4>
                         <div class="d-inline float-right mt-1">
                             <label class="toggle toggle-menu-color"><input type="checkbox"><span class="toggle-icon"></span></label>
@@ -158,11 +158,15 @@
                         </div>
                     </div>
                     <div class="card bg-transparent-card border-0 d-block mt-3">
-                        <h4 class="d-inline font-xssss mont-font fw-700">Dark Mode</h4>
+                        <h4 class="d-inline font-xssss mont-font fw-700">Dark Mode</h4> -->
                         <div class="d-inline float-right mt-1">
-                            <label class="toggle toggle-dark"><input type="checkbox"><span class="toggle-icon"></span></label>
+                            <% if (userRecords.darkMode) { %>
+                                <label class="toggle toggle-dark"><input type="checkbox" checked></span></label>
+                            <% } else { %>
+                                <label class="toggle toggle-dark"><input type="checkbox"></span></label>
+                            <% } %>
                         </div>
-                    </div>
+                    <!-- </div>
                     
                 </div>
             </div> -->

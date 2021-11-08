@@ -43,7 +43,7 @@ router.put('/update-account', async (req, res) => {
     res.json('need this to work')
 })
 
-router.post("/update-account", (req, res) => {
+router.post("/update-account", (req, res, next) => {
     let userid = req.session.passport.user;
     console.log("*** inside update-account post route on backend ***")
     
@@ -74,6 +74,16 @@ router.post("/update-account", (req, res) => {
         // deletes temp image file in files folder
         fs.unlinkSync(files.upload.filepath)
     })
+})
+
+router.get('/darkmodechange', async (req, res) => {
+    let userid = req.session.passport.user;
+    // let userid = 2;
+    let currentSettingRaw = await db.users.findByPk(userid)
+    // console.log(currentSettingRaw.dataValues);
+    let newDarkModeSetting = !currentSettingRaw.dataValues.darkMode;
+    
+    db.users.update({darkMode: newDarkModeSetting}, {where: {id: userid}})
 })
 
 module.exports = router;

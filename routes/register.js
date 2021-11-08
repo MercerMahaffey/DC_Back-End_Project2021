@@ -24,7 +24,8 @@ router.post('/register', async (req, res) => {
             roleName: 'Basic',
             languages: "",
             github: "",
-            userimage: "https://res.cloudinary.com/dc-backend-project2021/image/upload/v1636327951/genericUser_gpcbds.png"
+            userimage: "https://res.cloudinary.com/dc-backend-project2021/image/upload/v1636327951/genericUser_gpcbds.png",
+            darkMode: false
         })
 
         res.redirect('/login')

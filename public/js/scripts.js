@@ -367,6 +367,7 @@ $(document).ready(function() {
     });
 
     
+    
     $('.toggle-menu-color input').on('change', function () {
         if (this.checked) {
             $('.navigation').addClass('menu-current-color');
@@ -390,16 +391,25 @@ $(document).ready(function() {
             $('body').removeClass('theme-full');
         }
     });
-    
-    
+    console.log(document.querySelector('.toggle-dark').firstElementChild);
+    if(document.querySelector('.toggle-dark').firstElementChild.checked){
+        $('body').addClass('theme-dark');
+    }
+    else if(!document.querySelector('.toggle-dark').firstElementChild.checked){
+        $('body').removeClass('theme-dark');
+    }
     $('.toggle-dark input').on('change', function () {
         if (this.checked) {
             $('body').addClass('theme-dark');
+            fetch('/darkmodechange');
         } else {
             $('body').removeClass('theme-dark');
+            fetch('/darkmodechange');
         }
     });
 
+    
+    
     $('input[name="color-radio"]').on('change', function () {
         if (this.checked) {
           $('body').removeClass('color-theme-teal color-theme-cadetblue color-theme-pink color-theme-deepblue color-theme-blue color-theme-red color-theme-black color-theme-gray color-theme-orange color-theme-yellow color-theme-green color-theme-white color-theme-brown color-theme-darkgreen color-theme-deeppink color-theme-darkorchid');
