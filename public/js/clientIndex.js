@@ -1,15 +1,7 @@
 
 let appendHere = document.querySelector('#appendHere');
 let commentSubmit = document.querySelector('#commentSubmit')
-let photoUploadIndexPost = docuement.querySelector("#photoUploadIndexPost")
-
-appendHere.addEventListener('click', (e) => {
-    
-    if(e.target.id == "createPhotoIndexButton"){
-        console.log('working');
-        photoUploadIndexPost.click()
-    }
-})
+let photoUploadIndexPost = document.querySelector("#photoUploadIndexPost")
 
 let grabPost = async () => {
     let response = await fetch('/posts');
@@ -130,28 +122,36 @@ let printPost = async (allPostsData) => {
 
 grabPost()
 
+appendHere.addEventListener('click', (e) => {
+    
+    if(e.target.id == "createPhotoIndexButton"){
+        console.log('working');
+        photoUploadIndexPost.click()
+    }
+})
 
 let commentsSection = document.querySelector('#comments')
+
 appendHere.addEventListener('click', async (e) =>{
     // console.log(e.target.id);
-    if(e.target.id ==="createPostUserButton"){
-        console.log('sending post');
-        let newPost = {
-            title: document.querySelector('#post-title').value,
-            content: document.querySelector('#post-message').value,
-            // imgurl: "imgURL"
-        }
-        console.log(newPost);
+    // if(e.target.id ==="createPostUserButton"){
+    //     console.log('sending post');
+    //     let newPost = {
+    //         title: document.querySelector('#post-title').value,
+    //         content: document.querySelector('#post-message').value,
+    //         // imgurl: "imgURL"
+    //     }
+    //     console.log(newPost);
     
-        let results = await fetch('/posts', {
-            method: "POST",
-            headers: { "Content-type": "application/json; charset=UTF-8" },
-            body: JSON.stringify(newPost)
-        })
+    //     let results = await fetch('/posts', {
+    //         method: "POST",
+    //         headers: { "Content-type": "application/json; charset=UTF-8" },
+    //         body: JSON.stringify(newPost)
+    //     })
     
-        let posts = await results.json()
-        grabPost()
-    }
+    //     let posts = await results.json()
+    //     grabPost()
+    // }
     if(e.target.id ==="commentButton"){
         // console.log(e.target.parentElement.parentElement.childNodes[2])
         if (e.target.parentElement.parentElement.childNodes[2].className === "none"){
