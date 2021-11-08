@@ -101,7 +101,7 @@ router.post("/user_posts", (req, res, next) => {
             await db.posts.create({title: fields.title, content: fields.content, languages: "javascript", userid: userid, imgurl: result.secure_url})
             console.log("inside cloudinary IF-STATEMENT")
             
-            // res.redirect("/")
+            res.redirect("/")
         })
         // deletes temp image file in files folder
         fs.unlinkSync(files.upload.filepath)
