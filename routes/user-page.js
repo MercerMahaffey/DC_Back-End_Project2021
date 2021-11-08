@@ -77,7 +77,7 @@ router.post("/user_posts", (req, res, next) => {
     form.uploadDir = uploadFolder
     form.parse(req, (err, fields, files) => {
         if(err){
-            console.log(`An error has occurred: ${err}`);
+            console.log(`An error has occurred inside of form.parse(): ${err}`);
             next()
             return
         }
@@ -88,7 +88,7 @@ router.post("/user_posts", (req, res, next) => {
         try{
             cloudinary.uploader.upload(files.upload.filepath, async (err, result) => {
                 if(err){
-                    console.log(`An error has occurred: ${err}`);
+                    console.log(`An error has occurred inside of cloudinary: ${err}`);
                     next()
                 }
                 console.log(`result: ${result}`);
