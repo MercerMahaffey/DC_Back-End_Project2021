@@ -5,6 +5,19 @@ let githubText = document.querySelector('#githubText');
 let javascriptCheck = document.querySelector('#javascriptCheck');
 let htmlCheck = document.querySelector('#htmlCheck');
 let cssCheck = document.querySelector('#cssCheck');
+let uploadProfilePhoto = document.querySelector("#uploadProfilePhoto")
+let photoUpload = document.querySelector("#photoUpload") // input tag to upload photo
+let submitProfilePhoto = document.querySelector("#submitProfilePhoto")
+
+uploadProfilePhoto.addEventListener("click", () => {
+    console.log('working');
+    photoUpload.click() // "clicks" input tag to upload photo
+})
+
+photoUpload.addEventListener("change", () => {
+    submitProfilePhoto.click()
+})
+
 
 submitUserInfoButton.addEventListener('click', async (e) => {
     console.log('sending');
