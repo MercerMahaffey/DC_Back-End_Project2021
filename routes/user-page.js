@@ -87,27 +87,41 @@ router.post("/user_posts", (req, res, next) => {
         console.log(`title: ${fields.title}`);
         console.log(`content: ${fields.content}`);
         console.log(`userid: ${userid}`);
-        await cloudinary.uploader.upload(files.upload.filepath, async (err, result) => {
-            console.log("inside cloudinary")
-            console.log(files.upload.filepath);
-            console.log(`result: ${result}`);
-            console.log(`imgurl: ${result.secure_url}`);
-            if(err){
-                console.log(`An error has occurred inside of cloudinary: ${err}`);
-                next()
-                return
-            }
-            console.log("reading");
-            console.log(`result.secure_url: ${result.secure_url}`);
-            await db.posts.create({title: fields.title, content: fields.content, languages: "javascript", userid: userid, imgurl: result.secure_url})
-            console.log("inside cloudinary IF-STATEMENT")
-            
+        console.log(`files: ${files} below`)
+        console.log(files)
+        console.log(`files.upload.size: ${files.upload.size}`);
+        if(files.upload.size !== 0){
+            console.log("inside filepath if-statement");
+            await cloudinary.uploader.upload(files.upload.filepath, async (err, result) => {
+                console.log("inside cloudinary")
+                console.log(files.upload.filepath);
+                // console.log(`imgurl: ${result.secure_url}`);
+                if(err){
+                    console.log(`An error has occurred inside of cloudinary: ${err}`);
+                    // next()
+                    return
+                }
+                console.log("reading");
+                console.log(`result.secure_url: ${result.secure_url}`);
+                await db.posts.create({title: fields.title, content: fields.content, languages: "javascript", userid: userid, imgurl: result.secure_url})
+                console.log("inside cloudinary IF-STATEMENT")
+                
+                res.redirect("/user-page")
+            })
+            // deletes temp image file in files folder
+            console.log("deleting");
+            fs.unlinkSync(files.upload.filepath)
+            console.log("bottom inside form")
+        }
+        else if(fields.content !== ""){
+            await db.posts.create({title: fields.title, content: fields.content, languages: "javascript", userid: userid, imgurl: ""})
+
             res.redirect("/user-page")
-        })
-        // deletes temp image file in files folder
-        console.log("deleting");
-        fs.unlinkSync(files.upload.filepath)
-        console.log("bottom inside form")
+        }
+        else{
+            console.log("content was empty and the post was not created");
+            res.redirect("/user-page")
+        }
     })
     
     // // grab title, content, languages, userid, imgurl from body parser

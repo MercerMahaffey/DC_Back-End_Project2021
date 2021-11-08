@@ -179,10 +179,9 @@ router.post("/posts", async (req, res, next) => {
         console.log(`userid: ${userid}`);
         await cloudinary.uploader.upload(files.upload.filepath, async (err, result) => {
             console.log("inside cloudinary")
-            console.log(files.upload.filepath);
             if(err){
                 console.log(`An error has occurred inside of cloudinary: ${err}`);
-                next()
+                // next()
                 return
             }
             console.log("reading");
