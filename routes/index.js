@@ -3,6 +3,16 @@ const router = express.Router();
 
 const db = require('../models');
 const auth = require('../auth/index');
+const formidable = require("formidable")
+const cloudinary = require("cloudinary").v2;
+const path = require("path");
+const fs = require('fs');
+
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET
+})
 
 router.get('/', auth, (req, res) => {
     console.log(req.session.passport.user);
@@ -123,7 +133,9 @@ router.get('/posts', async (req, res) => {
     }
  */
 // creating new post
-router.post('/posts', async (req, res) => {
+router.post("/posts", (req, res, next) => {
+
+    //creating post without form/cloudinary
     console.log('creating post');
 
     let userid = req.session.passport.user;
@@ -133,10 +145,72 @@ router.post('/posts', async (req, res) => {
     console.log({title, content, languages, userid, imgurl});
 
     await db.posts.create({title, content, languages, userid, imgurl})
+
+
+    // creating post with form/cloudinary
+    let userid = req.session.passport.user;
+    console.log("*** inside posts on backend ***");
     
-    let postRecords = await grabPosts();
+    // using formidable to grab encrypted data from the form
+    const form = new formidable.IncomingForm();
     
-    res.json(postRecords);
+    // gives filepath to house temp image file
+    let uploadFolder = path.join(__dirname, "../public", "files")
+    form.uploadDir = uploadFolder
+    console.log("top test")
+    form.parse(req, async (err, fields, files) => {
+        if(err){
+            console.log(`An error has occurred inside of form.parse(): ${err}`);
+            next()
+        }
+        // upload image to cloudinary and create post entry in db
+        console.log(`files: ${files}`);
+        console.log(`fields: ${fields}`);
+        console.log(`title: ${fields.title}`);
+        console.log(`content: ${fields.content}`);
+        console.log(`userid: ${userid}`);
+        if(fields.content && files.upload.filepath){
+            cloudinary.uploader.upload(files.upload.filepath, async (err, result) => {
+                console.log("inside cloudinary")
+                if(err){
+                    console.log(`An error has occurred inside of cloudinary: ${err}`);
+                    next()
+                }
+                console.log(`result: ${result}`);
+                console.log(`result.secure_url: ${result.secure_url}`);
+                await db.posts.create({title: fields.title, content: fields.content, languages: "javascript", userid: userid, imgurl: result.secure_url})
+                console.log(`imgurl: ${result.secure_url}`);
+                console.log("inside cloudinary IF-STATEMENT")
+                
+                // deletes temp image file in files folder
+                fs.unlinkSync(files.upload.filepath)
+                res.redirect("/")
+            })
+        }
+        else if(fields.content){
+            await db.posts.create({title: fields.title, content: fields.content, languages: "javascript", userid: userid, imgurl: ""})
+        }
+        
+        console.log("bottom inside form")
+    })
+    
+    // // grab title, content, languages, userid, imgurl from body parser
+    // let {title, content, languages, userid, imgurl} = req.body
+
+    // if (content){
+        
+    // await db.posts.create({title: title, content: content, languages: "javascript", userid: 1, imgurl: imgurl})
+    // }
+
+    
+    // // grab users posts from database sorted latest first
+    // let userPosts = await db.posts.findAll({
+    //     where: {userid: 1}, 
+    //     order: [
+    //         ["id", "DESC"]
+    //     ]}) // returns an array of objects
+    // res.json(userPosts)
+    console.log("bottom test")
 })
 
 
