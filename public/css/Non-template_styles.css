@@ -1,5 +1,9 @@
 
 /* id for photo upload input tag */
-#photoUpload{
+#photoUpload, #submitProfilePhoto{
     display: none
+}
+
+#uploadProfilePhoto:hover{
+    cursor:pointer
 }

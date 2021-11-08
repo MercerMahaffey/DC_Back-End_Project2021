@@ -58,7 +58,7 @@ router.get("/user_posts", async (req, res) => {
     res.json(postRecords);
 })
 
-router.post("/user_posts", async (req, res, next) => {
+router.post("/user_posts", (req, res, next) => {
     
     console.log("*** inside user_posts on backend ***");
     
@@ -86,6 +86,7 @@ router.post("/user_posts", async (req, res, next) => {
             console.log(`result.secure_url: ${result.secure_url}`);
             if(fields.content){
                 await db.posts.create({title: fields.title, content: fields.content, languages: "javascript", userid: 1, imgurl: result.secure_url})
+                res.redirect("/")
             }
             else{
                 console.log("The post content is empty or null and the post was not created.");
@@ -95,7 +96,6 @@ router.post("/user_posts", async (req, res, next) => {
         fs.unlinkSync(files.upload.filepath)
         console.log(req.session.passport.user)
     })
-    setTimeout(redirectHomePage, 0, res) // currently the homepages loads before the db is updated with the new post. use setTimeout to fix???
     
     // // grab title, content, languages, userid, imgurl from body parser
     // let {title, content, languages, userid, imgurl} = req.body
@@ -114,9 +114,5 @@ router.post("/user_posts", async (req, res, next) => {
     //     ]}) // returns an array of objects
     // res.json(userPosts)
 })
-
-const redirectHomePage = (res) => {
-    res.redirect("/")
-}
 
 module.exports = router;

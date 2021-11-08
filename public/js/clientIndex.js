@@ -2,7 +2,13 @@
 let appendHere = document.querySelector('#appendHere');
 let commentSubmit = document.querySelector('#commentSubmit')
 
-
+appendHere.addEventListener('click', (e) => {
+    
+    if(e.target.id == "createPhotoUserButton"){
+        console.log('working');
+        photoUpload.click()
+    }
+})
 
 let grabPost = async () => {
     let response = await fetch('/posts');
