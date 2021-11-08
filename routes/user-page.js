@@ -36,8 +36,15 @@ let grabPosts = async (userid) => {
     return postRecords;
 }
 
-router.get('/user-page', auth, (req, res) => {
-    res.render('user-page')
+router.get('/user-page', auth, async (req, res) => {
+    let userid = req.session.passport.user;
+
+    let user = await db.users.findByPk(userid);
+    let userRecords = await user.dataValues;
+    console.log(userRecords);
+    res.render('user-page', {
+        userRecords
+    })
 })
 
 router.get('/users', async (req, res) => {
