@@ -1,12 +1,13 @@
 
 let appendHere = document.querySelector('#appendHere');
 let commentSubmit = document.querySelector('#commentSubmit')
+let photoUploadIndexPost = docuement.querySelector("#photoUploadIndexPost")
 
 appendHere.addEventListener('click', (e) => {
     
-    if(e.target.id == "createPhotoUserButton"){
+    if(e.target.id == "createPhotoIndexButton"){
         console.log('working');
-        photoUpload.click()
+        photoUploadIndexPost.click()
     }
 })
 

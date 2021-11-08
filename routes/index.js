@@ -3,6 +3,16 @@ const router = express.Router();
 
 const db = require('../models');
 const auth = require('../auth/index');
+const formidable = require("formidable")
+const cloudinary = require("cloudinary").v2;
+const path = require("path");
+const fs = require('fs');
+
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET
+})
 
 router.get('/', auth, (req, res) => {
     console.log(req.session.passport.user);
