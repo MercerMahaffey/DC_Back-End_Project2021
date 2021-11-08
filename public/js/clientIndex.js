@@ -126,7 +126,7 @@ let printPost = async (allPostsData) => {
                         <div class="card-body d-block p-0 mb-3">
                             <div class="row ps-2 pe-2">
                                 
-                                <div class="col-sm-12 p-1"><a href="${post.imgurl}" data-lightbox="roadtr"><img src="${post.imgurl}" class="rounded-3 w-100" alt="image"></a></div>                                        
+                                <div class="col-sm-12 p-1 feedImage"><a href="${post.imgurl}" data-lightbox="roadtr"><img src="${post.imgurl}" class="rounded-3 w-100" alt="image"></a></div>                                        
                             </div>
                         </div>
                         <form class="${user.id}" action="/comments/${post.id}" method="post">
@@ -153,7 +153,7 @@ let printPost = async (allPostsData) => {
                             
                             <h4 id="nameArea" class="fw-700 text-grey-900 font-xssss mt-1">${user.username}<span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">${post.createdAt.substring(0,10)} ${post.createdAt.substring(11,16)}</span></h4>
                             <a href="#" class="ms-auto"></a>
-                            <h4 id="deletePost" class="btn btn-danger" >Delete Post</h4>
+                            <h4 id="deletePost" class="deletePost btn btn-danger" >Delete Post</h4>
                         </div>
                         <div class="card-body p-0 me-lg-5">
                             <h1>${post.title}</h1>
