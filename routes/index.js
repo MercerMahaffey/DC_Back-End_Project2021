@@ -143,7 +143,9 @@ router.get('/posts', async (req, res) => {
 router.post("/posts", async (req, res, next) => {
 
     // //creating post without form/cloudinary
-    // console.log('creating post');
+    console.log('creating post');
+
+    // console.log(req.body);
 
     // let userid = req.session.passport.user;
     // // deconstructing from json so all are strings
@@ -172,11 +174,13 @@ router.post("/posts", async (req, res, next) => {
             return
         }
         // upload image to cloudinary and create post entry in db
-        console.log(`files: ${files}`);
-        console.log(`fields: ${fields}`);
-        console.log(`title: ${fields.title}`);
-        console.log(`content: ${fields.content}`);
-        console.log(`userid: ${userid}`);
+        // console.log(`files: ${files}`);
+        console.log(`fields.javascript: ${typeof fields.javascript}`);
+        // console.log(`fields.html: ${fields.html}`);
+        // console.log(`fields.css: ${fields.css}`);
+        // console.log(`title: ${fields.title}`);
+        // console.log(`content: ${fields.content}`);
+        // console.log(`userid: ${userid}`);
         await cloudinary.uploader.upload(files.upload.filepath, async (err, result) => {
             console.log("inside cloudinary")
             console.log(files.upload.filepath);
@@ -188,7 +192,21 @@ router.post("/posts", async (req, res, next) => {
             console.log("reading");
             console.log(`result: ${result}`);
             console.log(`result.secure_url: ${result.secure_url}`);
-            await db.posts.create({title: fields.title, content: fields.content, languages: "javascript", userid: userid, imgurl: result.secure_url})
+            let languages = '';
+            if(fields.javascript){
+                languages += "javascript, "
+            }
+            if(fields.html){
+                languages += "html, "
+            }
+            if(fields.css){
+                languages += "css, "
+            }
+            if(languages == ''){
+                languages = 'english, '
+            }
+            languages = languages.substring(0, languages.length-2)
+            await db.posts.create({title: fields.title, content: fields.content, languages, userid: userid, imgurl: result.secure_url})
             console.log(`imgurl: ${result.secure_url}`);
             console.log("inside cloudinary IF-STATEMENT")
             res.redirect("/")
