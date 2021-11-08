@@ -240,7 +240,7 @@
 
                                     <!-- USER INFO DISPLAY -->
                                     <form action="/update-account" enctype="multipart/form-data" method="post">
-                                        <input id="photoUpload" type="file" name="upload">
+                                        <input id="photoUploadUserProfile" type="file" name="upload">
                                         <figure class="avatar ms-auto me-auto mb-0 mt-2 w100"><img id="uploadProfilePhoto" width="100px" height="100px" src="<%= userRecords.userimage %>" alt="image" class="shadow-sm rounded-3 w-100"></figure>
                                         <input id="submitProfilePhoto" type="submit">
                                     </form>
@@ -274,8 +274,6 @@
                                         <div class="form-group">
                                             <label class="mont-font fw-600 font-xsss">Github</label>
                                             <input id="githubText" name="githubText" type="text" class="form-control" placeholder="<%= userRecords.github %>">  
-                                             
-                                             
                                             
                                         </div>        
                                     </div>
