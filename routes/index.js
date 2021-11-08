@@ -148,7 +148,7 @@ router.post("/posts", async (req, res, next) => {
 
 
     // creating post with form/cloudinary
-    let userid = req.session.passport.user;
+    // let userid = req.session.passport.user;
     console.log("*** inside posts on backend ***");
     
     // using formidable to grab encrypted data from the form
