@@ -62,10 +62,10 @@ let printPost = async (allPostsData) => {
                         commentName = usersArrayUser.username;
                         // if same user as logged in
                         if(userid === comment.userid){
-                            commentsHtmlBlock += `<div id="${comment.id}" style="color: black;" ><span id="deleteComment" class="btn btn-danger">Delete</span><span style="font-weight: bold; font-size: 20px;"> ${commentName}: </span>${comment.content}</div> <br>`
+                            commentsHtmlBlock += `<div id="${comment.id}" class="darkText"" ><span id="deleteComment" class="btn btn-danger">Delete</span><span style="font-weight: bold; font-size: 20px;"> ${commentName}: </span>${comment.content}</div> <br>`
                         }
                         else{
-                            commentsHtmlBlock += `<div id="${comment.id}" style="color: black;" ><span style="font-weight: bold; font-size: 20px;">${commentName}: </span>${comment.content}</div> <br>`
+                            commentsHtmlBlock += `<div id="${comment.id}" class="darkText" ><span style="font-weight: bold; font-size: 20px;">${commentName}: </span>${comment.content}</div> <br>`
                         }
                         
                     }
@@ -150,7 +150,7 @@ let printPost = async (allPostsData) => {
                         <div id="${post.id}" class="commentSection card-body d-flex p-0">
                             
                             
-                            <a  style="cursor:pointer;" class="d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss"><i id="commentButton" class="feather-message-circle text-dark text-grey-900 btn-round-sm font-lg"></i><span id="commentButton" class="d-none-xss">${post.comments.length} Comments.</span></a><div id="comments" class="visually-hidden">` + commentsHtmlBlock + `</div></div></div><br></br>`
+                            <a  style="cursor:pointer;" class=" d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss"><i id="commentButton" class="feather-message-circle text-dark text-grey-900 btn-round-sm font-lg"></i><span id="commentButton" class=" d-none-xss">${post.comments.length} Comments.</span></a><div id="comments" class="visually-hidden">` + commentsHtmlBlock + `</div></div></div><br></br>`
                 }
             }
             // no picture
@@ -162,7 +162,7 @@ let printPost = async (allPostsData) => {
                         <div id="${post.id}" class="card-body p-0 d-flex">
                             <figure class="avatar me-3"><img src="${userImage}" alt="image" class="shadow-sm rounded-circle w45"></figure>
                             
-                            <h4 id="nameArea" class="fw-700 text-grey-900 font-xssss mt-1">${user.username}<span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">${post.createdAt.substring(0,10)} ${post.createdAt.substring(11,16)}</span></h4>
+                            <h4 id="nameArea" class=" fw-700 text-grey-900 font-xssss mt-1">${user.username}<span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">${post.createdAt.substring(0,10)} ${post.createdAt.substring(11,16)}</span></h4>
                             <a href="#" class="ms-auto"></a>
                             <h4 id="deletePost" class="deletePost btn btn-danger" >Delete Post</h4>
                         </div>
