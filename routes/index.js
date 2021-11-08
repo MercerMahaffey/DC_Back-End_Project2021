@@ -155,7 +155,7 @@ router.post("/posts", async (req, res, next) => {
 
 
     // creating post with form/cloudinary
-    // let userid = req.session.passport.user;
+    let userid = req.session.passport.user;
     console.log("*** inside posts post route on backend ***");
     
     // using formidable to grab encrypted data from the form
@@ -193,7 +193,7 @@ router.post("/posts", async (req, res, next) => {
             res.redirect("/")
         })
         // deletes temp image file in files folder
-        // fs.unlinkSync(files.upload.filepath)
+        fs.unlinkSync(files.upload.filepath)
         console.log("bottom inside form")
     })
     

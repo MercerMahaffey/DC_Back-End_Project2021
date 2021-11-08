@@ -67,6 +67,7 @@ router.get("/user_posts", async (req, res) => {
 
 router.post("/user_posts", (req, res, next) => {
     let userid = req.session.passport.user;
+    console.log(`userid = ${req.session.passport.user}`);
     console.log("*** inside user_posts post route on backend ***");
     
     // using formidable to grab encrypted data from the form
