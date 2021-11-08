@@ -81,11 +81,13 @@ router.post("/user_posts", (req, res, next) => {
             console.log(`An error has occurred inside of form.parse(): ${err}`);
             next()
         }
+        // upload image to cloudinary and create post entry in db
         console.log(`title: ${fields.title}`);
         console.log(`content: ${fields.content}`);
-        // upload image to cloudinary and create post entry in db
+        console.log(`userid: ${userid}`);
         if(fields.content && files.upload.filepath){
             cloudinary.uploader.upload(files.upload.filepath, async (err, result) => {
+                console.log(`imgurl: ${result.secure_url}`);
                 console.log("inside cloudinary")
                 if(err){
                     console.log(`An error has occurred inside of cloudinary: ${err}`);
@@ -95,14 +97,16 @@ router.post("/user_posts", (req, res, next) => {
                 console.log(`result.secure_url: ${result.secure_url}`);
                 await db.posts.create({title: fields.title, content: fields.content, languages: "javascript", userid: userid, imgurl: result.secure_url})
                 console.log("inside cloudinary IF-STATEMENT")
+                
+                // deletes temp image file in files folder
+                fs.unlinkSync(files.upload.filepath)
                 res.redirect("/")
             })
         }
         else if(fields.content){
             await db.posts.create({title: fields.title, content: fields.content, languages: "javascript", userid: userid, imgurl: ""})
         }
-        // deletes temp image file in files folder
-        fs.unlinkSync(files.upload.filepath)
+        
         console.log("bottom inside form")
     })
     

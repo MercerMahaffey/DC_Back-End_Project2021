@@ -1,14 +1,7 @@
 
 let appendHere = document.querySelector('#appendHere');
 let commentSubmit = document.querySelector('#commentSubmit')
-
-appendHere.addEventListener('click', (e) => {
-    
-    if(e.target.id == "createPhotoUserButton"){
-        // console.log('working');
-        photoUpload.click()
-    }
-})
+let photoUploadIndexPost = document.querySelector("#photoUploadIndexPost")
 
 let grabPost = async () => {
     let response = await fetch('/posts');
@@ -222,18 +215,26 @@ let printPost = async (allPostsData) => {
 
 grabPost()
 
+appendHere.addEventListener('click', (e) => {
+    
+    if(e.target.id == "createPhotoIndexButton"){
+        console.log('working');
+        photoUploadIndexPost.click()
+    }
+})
 
 let commentsSection = document.querySelector('#comments')
+
 appendHere.addEventListener('click', async (e) =>{
     // console.log(e.target.id);
-    if(e.target.id ==="createPostUserButton"){
-        console.log('sending post');
-        let newPost = {
-            title: document.querySelector('#post-title').value,
-            content: document.querySelector('#post-message').value,
-            // imgurl: "imgURL"
-        }
-        console.log(newPost);
+    // if(e.target.id ==="createPostUserButton"){
+    //     console.log('sending post');
+    //     let newPost = {
+    //         title: document.querySelector('#post-title').value,
+    //         content: document.querySelector('#post-message').value,
+    //         // imgurl: "imgURL"
+    //     }
+    //     console.log(newPost);
     
         fetch('/posts', {
             method: "POST",
@@ -242,7 +243,6 @@ appendHere.addEventListener('click', async (e) =>{
         })
     
         location.reload();
-    }
     if(e.target.id ==="commentButton"){
         // console.log(e.target.parentElement.parentElement.childNodes[2])
         if (e.target.parentElement.parentElement.childNodes[2].className === "none"){

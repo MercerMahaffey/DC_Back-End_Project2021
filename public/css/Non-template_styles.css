@@ -1,6 +1,6 @@
 
 /* id for photo upload input tag */
-#photoUploadUserPost, #submitProfilePhoto, #photoUploadUserProfile{
+#photoUploadIndexPost, #photoUploadUserPost, #submitProfilePhoto, #photoUploadUserProfile{
     display: none
 }
 
