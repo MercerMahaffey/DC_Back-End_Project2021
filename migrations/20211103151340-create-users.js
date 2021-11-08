@@ -29,6 +29,9 @@ module.exports = {
       roleName: {
         type: Sequelize.STRING
       },
+      darkMode: {
+        type: Sequelize.BOOLEAN
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
