@@ -1,8 +1,8 @@
 
 /* id for photo upload input tag */
-#photoUploadIndexPost, #photoUploadUserPost, #submitProfilePhoto, #photoUploadUserProfile{
+/* #photoUploadIndexPost, #photoUploadUserPost, #submitProfilePhoto, #photoUploadUserProfile{
     display: none
-}
+} */
 
 #uploadProfilePhoto:hover{
     cursor:pointer

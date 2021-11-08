@@ -43,7 +43,7 @@ router.put('/update-account', async (req, res) => {
     res.json('need this to work')
 })
 
-router.post("/update-account", (req, res) => {
+router.post("/update-account", (req, res, next) => {
     let userid = req.session.passport.user;
     console.log("*** inside update-account post route on backend ***")
     
@@ -57,6 +57,7 @@ router.post("/update-account", (req, res) => {
         if(err){
             console.log(`An error has occurred: ${err}`);
             next()
+            return
         }
         console.log(files);
         // upload image to cloudinary and create post entry in db
@@ -68,12 +69,21 @@ router.post("/update-account", (req, res) => {
             console.log(`result: ${result}`);
             console.log(`result.secure_url: ${result.secure_url}`);
             await db.users.update({userimage: result.secure_url}, {where: {id: userid}})
-            let response = await db.users.findByPk(userid)
             res.redirect("/account-information")
         })
         // deletes temp image file in files folder
         fs.unlinkSync(files.upload.filepath)
     })
+})
+
+router.get('/darkmodechange', async (req, res) => {
+    let userid = req.session.passport.user;
+    // let userid = 2;
+    let currentSettingRaw = await db.users.findByPk(userid)
+    // console.log(currentSettingRaw.dataValues);
+    let newDarkModeSetting = !currentSettingRaw.dataValues.darkMode;
+    
+    db.users.update({darkMode: newDarkModeSetting}, {where: {id: userid}})
 })
 
 module.exports = router;
