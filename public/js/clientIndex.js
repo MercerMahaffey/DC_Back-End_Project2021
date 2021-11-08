@@ -211,14 +211,6 @@ let printPost = async (allPostsData) => {
 
 grabPost()
 
-appendHere.addEventListener('click', (e) => {
-    
-    if(e.target.id == "createPhotoIndexButton"){
-        console.log('working');
-        photoUploadIndexPost.click()
-    }
-})
-
 let commentsSection = document.querySelector('#comments')
 
 appendHere.addEventListener('click', async (e) =>{
@@ -281,6 +273,14 @@ appendHere.addEventListener('click', async (e) =>{
 // else if(commentsSection.className === "none"){
 //     commentsSection.className = "visually-hidden";
 // }
+
+appendHere.addEventListener('click', (e) => {
+    
+    if(e.target.id == "createPhotoIndexButton"){
+        console.log('working');
+        photoUploadIndexPost.click()
+    }
+})
     
 
 

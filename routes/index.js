@@ -133,18 +133,18 @@ router.get('/posts', async (req, res) => {
     }
  */
 // creating new post
-router.post("/posts", (req, res, next) => {
+router.post("/posts", async (req, res, next) => {
 
-    //creating post without form/cloudinary
-    console.log('creating post');
+    // //creating post without form/cloudinary
+    // console.log('creating post');
 
-    let userid = req.session.passport.user;
-    // deconstructing from json so all are strings
-    let {title, content, languages, imgurl} = req.body;
-    // console.log(req.body)
-    console.log({title, content, languages, userid, imgurl});
+    // let userid = req.session.passport.user;
+    // // deconstructing from json so all are strings
+    // let {title, content, languages, imgurl} = req.body;
+    // // console.log(req.body)
+    // console.log({title, content, languages, userid, imgurl});
 
-    await db.posts.create({title, content, languages, userid, imgurl})
+    // await db.posts.create({title, content, languages, userid, imgurl})
 
 
     // creating post with form/cloudinary
@@ -169,28 +169,23 @@ router.post("/posts", (req, res, next) => {
         console.log(`title: ${fields.title}`);
         console.log(`content: ${fields.content}`);
         console.log(`userid: ${userid}`);
-        if(fields.content && files.upload.filepath){
-            cloudinary.uploader.upload(files.upload.filepath, async (err, result) => {
-                console.log("inside cloudinary")
-                if(err){
-                    console.log(`An error has occurred inside of cloudinary: ${err}`);
-                    next()
-                }
-                console.log(`result: ${result}`);
-                console.log(`result.secure_url: ${result.secure_url}`);
-                await db.posts.create({title: fields.title, content: fields.content, languages: "javascript", userid: userid, imgurl: result.secure_url})
-                console.log(`imgurl: ${result.secure_url}`);
-                console.log("inside cloudinary IF-STATEMENT")
-                
-                // deletes temp image file in files folder
-                fs.unlinkSync(files.upload.filepath)
-                res.redirect("/")
-            })
-        }
-        else if(fields.content){
-            await db.posts.create({title: fields.title, content: fields.content, languages: "javascript", userid: userid, imgurl: ""})
-        }
-        
+        cloudinary.uploader.upload(files.upload.filepath, async (err, result) => {
+            console.log("inside cloudinary")
+            console.log(files.upload.filepath);
+            if(err){
+                console.log(`An error has occurred inside of cloudinary: ${err}`);
+                next()
+                return
+            }
+            console.log(`result: ${result}`);
+            console.log(`result.secure_url: ${result.secure_url}`);
+            await db.posts.create({title: fields.title, content: fields.content, languages: "javascript", userid: userid, imgurl: result.secure_url})
+            console.log(`imgurl: ${result.secure_url}`);
+            console.log("inside cloudinary IF-STATEMENT")
+            res.redirect("/")
+        })
+        // deletes temp image file in files folder
+        fs.unlinkSync(files.upload.filepath)
         console.log("bottom inside form")
     })
     
