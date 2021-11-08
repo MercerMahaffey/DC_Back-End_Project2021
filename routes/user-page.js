@@ -79,26 +79,33 @@ router.post("/user_posts", (req, res, next) => {
         if(err){
             console.log(`An error has occurred: ${err}`);
             next()
+            return
         }
         console.log(`title: ${fields.title}`);
         console.log(`content: ${fields.content}`);
         // upload image to cloudinary and create post entry in db
         // todo if() make if statement so cloudinary code doesn't run when no photo is on post
-        cloudinary.uploader.upload(files.upload.filepath, async (err, result) => {
-            if(err){
-                console.log(`An error has occurred: ${err}`);
-                next()
-            }
-            console.log(`result: ${result}`);
-            console.log(`result.secure_url: ${result.secure_url}`);
-            if(fields.content){
-                await db.posts.create({title: fields.title, content: fields.content, languages: "javascript", userid: 1, imgurl: result.secure_url})
-                res.redirect("/")
-            }
-            else{
-                console.log("The post content is empty or null and the post was not created.");
-            }
-        })
+        try{
+            cloudinary.uploader.upload(files.upload.filepath, async (err, result) => {
+                if(err){
+                    console.log(`An error has occurred: ${err}`);
+                    next()
+                }
+                console.log(`result: ${result}`);
+                console.log(`result.secure_url: ${result.secure_url}`);
+                if(fields.content){
+                    await db.posts.create({title: fields.title, content: fields.content, languages: "javascript", userid: 1, imgurl: result.secure_url})
+                    res.redirect("/")
+                }
+                else{
+                    console.log("The post content is empty or null and the post was not created.");
+                }
+            })
+        }
+        catch(err){
+            console.log(`catch error: ${err}`);
+        }
+
         // deletes temp image file in files folder
         fs.unlinkSync(files.upload.filepath)
         console.log(req.session.passport.user)
