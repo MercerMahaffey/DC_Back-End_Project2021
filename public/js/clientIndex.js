@@ -25,6 +25,7 @@ let printPost = async (allPostsData) => {
     // console.log("printing post");
     let usersArrayRaw = await fetch('/username');
     let usersArray = await usersArrayRaw.json();
+    console.log(usersArray);
     // console.log(usersArray);
     let htmlBlock = '';
     // let allUsers = JSON.stringify(allPostsData)
@@ -53,7 +54,8 @@ let printPost = async (allPostsData) => {
                 let commentName = 'noName';
                 usersArray.forEach(usersArrayUser => {
                     if(usersArrayUser.id === comment.userid){
-                        commentName = user.username;
+                        commentName = usersArrayUser.username;
+                        commentsHtmlBlock += `<div style="color: black;" ><span style="font-weight: bold; font-size: 20px;">${commentName}: </span>${comment.content}</div> <br>`
                     }
                     
                 })
@@ -66,7 +68,7 @@ let printPost = async (allPostsData) => {
                 
                 // let commentName = allPostsData[comment.userid-1].username;
                 // console.log(commentName);
-                commentsHtmlBlock += `<div style="color: black;" ><span style="font-weight: bold; font-size: 20px;">${commentName}: </span>${comment.content}</div> <br>`
+                
             })
             
             // console.log(commentsHtmlBlock);
