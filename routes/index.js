@@ -8,6 +8,10 @@ router.get('/', auth, (req, res) => {
     console.log(req.session.passport.user);
     res.render('index')
 })
+router.get('/userid', auth, (req, res) => {
+    let userid = req.session.passport.user;
+    res.json(userid);
+})
 
 router.get('/logout', (req, res) => {
     
@@ -120,11 +124,13 @@ router.get('/posts', async (req, res) => {
  */
 // creating new post
 router.post('/posts', async (req, res) => {
+    console.log('creating post');
 
     let userid = req.session.passport.user;
     // deconstructing from json so all are strings
     let {title, content, languages, imgurl} = req.body;
     // console.log(req.body)
+    console.log({title, content, languages, userid, imgurl});
 
     await db.posts.create({title, content, languages, userid, imgurl})
     

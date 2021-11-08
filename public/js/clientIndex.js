@@ -25,8 +25,11 @@ let printPost = async (allPostsData) => {
     // console.log("printing post");
     let usersArrayRaw = await fetch('/username');
     let usersArray = await usersArrayRaw.json();
-    console.log(usersArray);
     // console.log(usersArray);
+    // console.log(usersArray);
+    let useridRaw = await fetch('/userid');
+    let userid = await useridRaw.json();
+    console.log(userid);
     let htmlBlock = '';
     // let allUsers = JSON.stringify(allPostsData)
     allPostsData.forEach(user => {
@@ -72,7 +75,12 @@ let printPost = async (allPostsData) => {
             })
             
             // console.log(commentsHtmlBlock);
+            //if the post contains an image
             if(post.imgurl){
+                console.log(post.userid);
+                if(post.userid === userid){
+                    console.log("same user");
+                }
             htmlBlock += `<div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-0">
                         <div class="card-body p-0 d-flex">
                             <figure class="avatar me-3"><img src="${userImage}" alt="image" class="shadow-sm rounded-circle w45"></figure>
@@ -103,6 +111,10 @@ let printPost = async (allPostsData) => {
                             <a  style="cursor:pointer;" class="d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss"><i id="commentButton" class="feather-message-circle text-dark text-grey-900 btn-round-sm font-lg"></i><span id="commentButton" class="d-none-xss">${post.comments.length} Comments.</span></a><div id="comments" class="visually-hidden">` + commentsHtmlBlock + `</div></div></div><br></br>`
             }
             else{
+                if(post.userid === userid){
+                    console.log("same user");
+                }
+                console.log(post.userid);
                 htmlBlock += `<div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-0">
                         <div class="card-body p-0 d-flex">
                             <figure class="avatar me-3"><img src="${userImage}" alt="image" class="shadow-sm rounded-circle w45"></figure>
