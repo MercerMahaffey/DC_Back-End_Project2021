@@ -18,13 +18,21 @@ let printPost = async (allPostsData) => {
     // console.log("printing post");
     let usersArrayRaw = await fetch('/username');
     let usersArray = await usersArrayRaw.json();
-    // console.log(usersArray);
+    console.log(usersArray);
     // console.log(usersArray);
     let htmlBlock = '';
     // let allUsers = JSON.stringify(allPostsData)
     allPostsData.forEach(user => {
         let userPosts = user.posts;
+        
         userPosts.forEach(post => {
+            let userImage = '';
+            usersArray.forEach(usersArrayUser => {
+                if(usersArrayUser.id == post.userid){
+                    userImage = usersArrayUser.userimage
+                    
+                }
+            });
             let postComments = post.comments;
             let commentsHtmlBlock = '';
             // console.log(postComments);
@@ -37,10 +45,12 @@ let printPost = async (allPostsData) => {
                 // let commentName = '';
                 // console.log(allPostsData);
                 let commentName = 'noName';
-                usersArray.forEach(user => {
-                    if(user.id === comment.userid){
-                        commentName = user.username;
+                usersArray.forEach(usersArrayUser => {
+                    if(usersArrayUser.id === comment.userid){
+                        commentName = usersArrayUser.username;
+                        commentsHtmlBlock += `<div style="color: black;" ><span style="font-weight: bold; font-size: 20px;">${commentName}: </span>${comment.content}</div> <br>`
                     }
+                    
                 })
                 
                     // console.log(usersArray[comment.userid-1]);
@@ -51,14 +61,14 @@ let printPost = async (allPostsData) => {
                 
                 // let commentName = allPostsData[comment.userid-1].username;
                 // console.log(commentName);
-                commentsHtmlBlock += `<div style="color: black;" ><span style="font-weight: bold; font-size: 20px;">${commentName}: </span>${comment.content}</div> <br>`
+                
             })
             
             // console.log(commentsHtmlBlock);
             if(post.imgurl){
             htmlBlock += `<div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-0">
                         <div class="card-body p-0 d-flex">
-                            <figure class="avatar me-3"><img src="https://via.placeholder.com/50x50.png" alt="image" class="shadow-sm rounded-circle w45"></figure>
+                            <figure class="avatar me-3"><img src="${userImage}" alt="image" class="shadow-sm rounded-circle w45"></figure>
                             
                             <h4 id="nameArea" class="fw-700 text-grey-900 font-xssss mt-1">${user.username}<span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">${post.createdAt.substring(0,10)} ${post.createdAt.substring(11,16)}</span></h4>
                             <a href="#" class="ms-auto"></a>
@@ -88,7 +98,7 @@ let printPost = async (allPostsData) => {
             else{
                 htmlBlock += `<div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-0">
                         <div class="card-body p-0 d-flex">
-                            <figure class="avatar me-3"><img src="https://via.placeholder.com/50x50.png" alt="image" class="shadow-sm rounded-circle w45"></figure>
+                            <figure class="avatar me-3"><img src="${userImage}" alt="image" class="shadow-sm rounded-circle w45"></figure>
                             
                             <h4 id="nameArea" class="fw-700 text-grey-900 font-xssss mt-1">${user.username}<span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">${post.createdAt.substring(0,10)} ${post.createdAt.substring(11,16)}</span></h4>
                             <a href="#" class="ms-auto"></a>
