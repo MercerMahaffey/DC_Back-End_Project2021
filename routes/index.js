@@ -149,7 +149,7 @@ router.post("/posts", async (req, res, next) => {
 
     // creating post with form/cloudinary
     // let userid = req.session.passport.user;
-    console.log("*** inside posts on backend ***");
+    console.log("*** inside posts post route on backend ***");
     
     // using formidable to grab encrypted data from the form
     const form = new formidable.IncomingForm();
@@ -158,10 +158,11 @@ router.post("/posts", async (req, res, next) => {
     let uploadFolder = path.join(__dirname, "../public", "files")
     form.uploadDir = uploadFolder
     console.log("top test")
-    form.parse(req, async (err, fields, files) => {
+    form.parse(req, (err, fields, files) => {
         if(err){
             console.log(`An error has occurred inside of form.parse(): ${err}`);
             next()
+            return
         }
         // upload image to cloudinary and create post entry in db
         console.log(`files: ${files}`);
@@ -185,7 +186,7 @@ router.post("/posts", async (req, res, next) => {
             res.redirect("/")
         })
         // deletes temp image file in files folder
-        fs.unlinkSync(files.upload.filepath)
+        // fs.unlinkSync(files.upload.filepath)
         console.log("bottom inside form")
     })
     
