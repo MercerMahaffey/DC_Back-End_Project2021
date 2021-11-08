@@ -49,7 +49,7 @@
 }
 
 .navBarIcon{
-  padding-left: 25px;
+  padding-right: 25px;
   justify-content: center;
 }
 
@@ -104,6 +104,38 @@
   font-size: 50px;
   color: white;
 }
+@media screen and (min-width: 375px) {
+  .welcomeBanner {
+    font-size: 25px;
+  }
+  .dateTime {
+    font-size: 25px;
+  }
+}
+@media screen and (min-width: 400px) {
+  .welcomeBanner {
+    font-size: 25px;
+  }
+  .dateTime {
+    font-size: 25px;
+  }
+}
+@media screen and (min-width: 600px) {
+  .welcomeBanner {
+    font-size: 30px;
+  }
+  .dateTime {
+    font-size: 30px;
+  }
+}
+@media screen and (min-width: 800px) {
+  .welcomeBanner {
+    font-size: 35px;
+  }
+  .dateTime {
+    font-size: 35px;
+  }
+}
 
 .bannerContainer{
   width: 100%;
@@ -117,13 +149,17 @@
   flex-direction: column;
   border-radius: 10px;
   margin-bottom: 20px;
+  margin-top: 20px;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1) !important;
 }
-@media screen and (min-width: 200px) {
-  .welcomeBanner {
-    font-size: 30px ; 
+@media screen and (min-width: 600px) {
+  .bannerContainer {
+    margin-top: 90px;
   }
-  .dateTime {
-    font-size: 25px ; 
+}
+@media screen and (min-width: 800px) {
+  .bannerContainer {
+    margin-top: 20px;
   }
 }
 
@@ -140,8 +176,8 @@
   overflow: visible;
   height: 100%;
   width: 100%;
-  margin-left: 3px;
-  margin-top: 20px;
+  margin-left: 1px;
+  
 }
 @media (max-width: 576px) {
   .feed-body {
@@ -12665,7 +12701,7 @@ strong,
   display: flex;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
-  justify-content: center;
+  justify-content: flex-start;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
