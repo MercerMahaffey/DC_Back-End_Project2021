@@ -280,9 +280,12 @@
                                     <form action="/posts" enctype="multipart/form-data" method="post">
                                         <div class="card-body p-0 mt-0 position-relative">
                                             <input type="text" name="title" id="post-title" class="bor-0 w-100 rounded-xxl p-2 ps-2 font-xssss fw-500 border-light-md theme-dark-bg darkText" cols="30" rows="10" placeholder="Post Title"></input>
-                                            <span> JavaScript  </span><input type="checkbox" name="javascript" id="javascriptCheck">
-                                            <span> HTML  </span><input type="checkbox" name="html" id="htmlCheck">
-                                            <span> CSS  </span><input type="checkbox" name="css" id="cssCheck">
+                                            &nbsp;
+                                            <span class="darkText"> JavaScript  </span><input style="margin-top: 20px;" type="checkbox" name="javascript" id="javascriptCheck">
+                                            &nbsp;
+                                            <span class="darkText"> HTML  </span><input style="margin-top: 20px;" type="checkbox" name="html" id="htmlCheck">
+                                            &nbsp;
+                                            <span class="darkText"> CSS  </span><input style="margin-top: 20px;" type="checkbox" name="css" id="cssCheck">
                                         </div>
                                         <div class="card-body p-0 mt-3 position-relative">
                                             <figure class="avatar position-absolute ms-2 mt-1 top-5"><img src="<%= userRecords.userimage %>" alt="image" class="shadow-sm rounded-circle w30"></figure>  
@@ -294,7 +297,7 @@
                                         
                                         <button id="createPostIndexButton" class="btn btn-primary text-white" type="submit">Create Post</button>
                                         &nbsp;
-                                        <input id="photoUploadIndexPost" type="file" name="upload" accept="images/*" capture="user">
+                                        <input id="photoUploadIndexPost" class="darkText" style="margin-top: 3px; margin-left: 3px;" type="file" name="upload" accept="images/*" capture="user">
                                         
                                         <!-- <label id="createPhotoIndexButton" for="photoUploadIndexPost" class="btn" style="color: white; background-color: #00ed1e;">Photo</label> -->
                                     </form>
