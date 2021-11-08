@@ -3,6 +3,14 @@ let appendHere = document.querySelector('#appendHere');
 let commentSubmit = document.querySelector('#commentSubmit')
 let photoUploadIndexPost = document.querySelector("#photoUploadIndexPost")
 
+appendHere.addEventListener('click', (e) => {
+    
+    if(e.target.id == "createPhotoIndexButton"){
+        console.log('working');
+        photoUploadIndexPost.click()
+    }
+})
+
 let grabPost = async () => {
     let response = await fetch('/posts');
     // console.log("grabbing post");
@@ -12,6 +20,7 @@ let grabPost = async () => {
     printPost(records)
     // let posts = await results.json();
     // updateStatus(posts)
+    console.log("grabbing posts");
 }
 
 let printPost = async (allPostsData) => {
@@ -215,14 +224,6 @@ let printPost = async (allPostsData) => {
 
 grabPost()
 
-appendHere.addEventListener('click', (e) => {
-    
-    if(e.target.id == "createPhotoIndexButton"){
-        console.log('working');
-        photoUploadIndexPost.click()
-    }
-})
-
 let commentsSection = document.querySelector('#comments')
 
 appendHere.addEventListener('click', async (e) =>{
@@ -236,13 +237,14 @@ appendHere.addEventListener('click', async (e) =>{
     //     }
     //     console.log(newPost);
     
-        // fetch('/posts', {
-        //     method: "POST",
-        //     headers: { "Content-type": "application/json; charset=UTF-8" },
-        //     body: JSON.stringify(newPost)
-        // })
+    //     fetch('/posts', {
+    //         method: "POST",
+    //         headers: { "Content-type": "application/json; charset=UTF-8" },
+    //         body: JSON.stringify(newPost)
+    //     })
     
-        // location.reload();
+    //     location.reload();
+    // }
     if(e.target.id ==="commentButton"){
         // console.log('clicking button');
         // console.log(e.target.parentElement.parentElement.childNodes[2])
@@ -286,11 +288,6 @@ appendHere.addEventListener('click', async (e) =>{
 // else if(commentsSection.className === "none"){
 //     commentsSection.className = "visually-hidden";
 // }
-    
-
-
-
-
 
 
 /* <div class="card-body d-flex p-0">

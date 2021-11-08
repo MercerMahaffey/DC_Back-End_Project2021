@@ -57,6 +57,7 @@ router.post("/update-account", (req, res, next) => {
         if(err){
             console.log(`An error has occurred: ${err}`);
             next()
+            return
         }
         console.log(files);
         // upload image to cloudinary and create post entry in db
@@ -68,7 +69,6 @@ router.post("/update-account", (req, res, next) => {
             console.log(`result: ${result}`);
             console.log(`result.secure_url: ${result.secure_url}`);
             await db.users.update({userimage: result.secure_url}, {where: {id: userid}})
-            let response = await db.users.findByPk(userid)
             res.redirect("/account-information")
         })
         // deletes temp image file in files folder
