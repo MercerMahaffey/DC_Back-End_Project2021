@@ -39,7 +39,7 @@ let printPost = async (allPostsData) => {
                 // console.log(allPostsData[comment.userid-1]);
                 let commentName = allPostsData[comment.userid-1].username;
                 // console.log(commentName);
-                commentsHtmlBlock += `<div style="color: black;" ><span style="font-weight: bold; font-size: 20px;">${commentName}: </span>${comment.content}</div> <br>`
+                commentsHtmlBlock += `<div class="darkText" ><span style="font-weight: bold; font-size: 20px;">${commentName}: </span>${comment.content}</div> <br>`
             })
             // console.log(commentsHtmlBlock);
             htmlBlock += `<div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-0">

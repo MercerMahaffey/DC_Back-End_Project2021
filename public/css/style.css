@@ -72,6 +72,7 @@
   border-color: white;
   border-style: none;
 }
+
 .commentSubmitButton{
   height: 40px;
   border-radius: 5px;
@@ -168,7 +169,7 @@
 }
 
 .feedImage{
-  height: ;
+  /* height: ; */
 }
 
 /* FEED BODY CSS */
@@ -202,8 +203,19 @@
 /* ############################################## */
 
 
+/* DARK MODE CSS */
+/* //############################################################## */
 
-
+.theme-dark .typeCommentArea {
+  background-color: #293145;
+  color: white;
+}
+.darkText{
+  color: black;
+}
+.theme-dark .darkText {
+  color: white;
+}
 
 
 
