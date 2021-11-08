@@ -11,10 +11,10 @@ Doorz is a social media web application where web developers are able to connect
 
 ## Team:
 
-<b>Mercer Mahaffey<b>
-<b>Devin Brock<b>
-<b>Stephen Doty<b>
-<b>James Ivy<b>
+Mercer Mahaffey
+Devin Brock
+Stephen Doty
+James Ivy
 
 ## Tools used to build this application:
 [Themeforest](https://themeforest.net/item/sociala-social-network-app-html-template/31502548) was used as a starter template to focus more on the functionality aspects of the website for this project.
@@ -49,6 +49,7 @@ Allow individuals to create an account to connect with other developers to discu
 - Upload a photo
 - Display date and time of each posts 
 - Allow another user to comment on a antoher users post
+
 ## Stretch Goals Future:
 
 - Ability to upload videos
