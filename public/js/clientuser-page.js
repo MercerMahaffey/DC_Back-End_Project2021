@@ -2,10 +2,12 @@
 let appendHere = document.querySelector('#appendHere');
 let commentSubmit = document.querySelector('#commentSubmit')
 let photoUploadUserPost = document.querySelector("#photoUploadUserPost") // input tag to upload photo
+let createPostUserButton = document.querySelector("#createPostUserButton")
+let createPhotoUserButton = document.querySelector("#createPhotoUserButton")
 
 appendHere.addEventListener('click', (e) => {
     
-    if(e.target.id == "createPhotoUserButton"){
+    if(e.target.id === "createPhotoUserButton"){
         console.log('working');
         photoUploadUserPost.click()
     }
@@ -16,10 +18,11 @@ let grabPost = async () => {
     // console.log("grabbing post");
     // let results = await fetch('/user_posts');
     let records = await response.json();
-    // console.log(records);
+    console.log(records);
     printPost(records)
     // let posts = await results.json();
     // updateStatus(posts)
+    console.log("grabbing posts");
 }
 
 let printPost = async (allPostsData) => {
@@ -27,13 +30,16 @@ let printPost = async (allPostsData) => {
     let htmlBlock = '';
     // let allUsers = JSON.stringify(allPostsData)
     allPostsData.forEach(user => {
+        console.log("allPostsData forEach");
         let userPosts = user.posts;
         console.log(userPosts);
         userPosts.forEach(post => {
+            console.log("userPosts forEach");
             console.log(post);
             let postComments = post.comments;
             let commentsHtmlBlock = '';
             postComments.forEach(comment => {
+                console.log("postComments forEach");
                 // console.log(typeof comment.userid);
                 // console.log(comment.userid);
                 // console.log(allPostsData[comment.userid-1]);
@@ -77,8 +83,7 @@ let printPost = async (allPostsData) => {
 
 }
 
-grabPost()
-
+// grabPost()
 
 let commentsSection = document.querySelector('#comments')
 
@@ -102,7 +107,7 @@ appendHere.addEventListener('click', (e) =>{
     //     let posts = await results.json()
     //     grabPost()
     // }
-    if(e.target.id ==="commentButton"){
+    if(e.target.id === "commentButton"){
         // console.log(e.target.parentElement.parentElement.childNodes[2])
         if (e.target.parentElement.parentElement.childNodes[2].className === "none"){
             e.target.parentElement.parentElement.childNodes[2].className = "visually-hidden"

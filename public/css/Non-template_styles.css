@@ -7,3 +7,7 @@
 #uploadProfilePhoto:hover{
     cursor:pointer
 }
+
+/* input[type="file"] {
+    display: none;
+} */

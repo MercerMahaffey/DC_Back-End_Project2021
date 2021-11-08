@@ -67,6 +67,7 @@ router.get("/user_posts", async (req, res) => {
 
 router.post("/user_posts", (req, res, next) => {
     let userid = req.session.passport.user;
+    console.log(`userid = ${req.session.passport.user}`);
     console.log("*** inside user_posts post route on backend ***");
     
     // using formidable to grab encrypted data from the form
@@ -100,7 +101,7 @@ router.post("/user_posts", (req, res, next) => {
             await db.posts.create({title: fields.title, content: fields.content, languages: "javascript", userid: userid, imgurl: result.secure_url})
             console.log("inside cloudinary IF-STATEMENT")
             
-            res.redirect("/")
+            // res.redirect("/")
         })
         // deletes temp image file in files folder
         fs.unlinkSync(files.upload.filepath)
