@@ -87,7 +87,7 @@ router.post("/user_posts", (req, res, next) => {
         console.log(`title: ${fields.title}`);
         console.log(`content: ${fields.content}`);
         console.log(`userid: ${userid}`);
-        cloudinary.uploader.upload(files.upload.filepath, async (err, result) => {
+        await cloudinary.uploader.upload(files.upload.filepath, async (err, result) => {
             console.log("inside cloudinary")
             console.log(files.upload.filepath);
             console.log(`result: ${result}`);
@@ -97,13 +97,15 @@ router.post("/user_posts", (req, res, next) => {
                 next()
                 return
             }
+            console.log("reading");
             console.log(`result.secure_url: ${result.secure_url}`);
             await db.posts.create({title: fields.title, content: fields.content, languages: "javascript", userid: userid, imgurl: result.secure_url})
             console.log("inside cloudinary IF-STATEMENT")
             
-            res.redirect("/")
+            res.redirect("/user-page")
         })
         // deletes temp image file in files folder
+        console.log("deleting");
         fs.unlinkSync(files.upload.filepath)
         console.log("bottom inside form")
     })

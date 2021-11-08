@@ -1,14 +1,14 @@
 
 /* id for photo upload input tag */
 
-/* #photoUploadIndexPost, #photoUploadUserPost, #submitProfilePhoto, #photoUploadUserProfile{
+#submitProfilePhoto, #photoUploadUserProfile{
 	width: 0.1px;
 	height: 0.1px;
 	opacity: 0;
 	overflow: hidden;
 	position: absolute;
 	z-index: -1;
-} */
+}
 
 #uploadProfilePhoto:hover{
     cursor:pointer

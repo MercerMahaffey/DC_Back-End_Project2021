@@ -1,14 +1,6 @@
 
 let appendHere = document.querySelector('#appendHere');
 let commentSubmit = document.querySelector('#commentSubmit')
-// let photoUploadUserPost = document.querySelector("#photoUploadUserPost")
-
-photoUploadUserPost.addEventListener("change", () => {
-    console.log("changed");
-    let labelVal = label.innerHTML
-    let fileName = e.target.value.split("/").pop()
-    console.log(fileName);
-})
 
 let grabPost = async () => {
     let response = await fetch('/user_posts');
