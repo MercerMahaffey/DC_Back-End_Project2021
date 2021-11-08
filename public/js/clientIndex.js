@@ -196,12 +196,8 @@ let printPost = async (allPostsData) => {
                         <div id="${post.id}" class="commentSection card-body d-flex p-0">
                             
                             
-<<<<<<< HEAD
-                            <a  style="cursor:pointer; margin-bottom: 20px;" class="d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss"><i id="commentButton" class="feather-message-circle text-dark text-grey-900 btn-round-sm font-lg"></i><span id="commentButton" class="d-none-xss">${post.comments.length} Comments.</span></a><div id="comments" class="visually-hidden">` + commentsHtmlBlock + `</div></div></div><br></br>`
-=======
                             <a  style="cursor:pointer;" class="d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss"><i id="commentButton" class="feather-message-circle text-dark text-grey-900 btn-round-sm font-lg"></i><span id="commentButton" class="d-none-xss">${post.comments.length} Comments.</span></a><div id="comments" class="visually-hidden">` + commentsHtmlBlock + `</div></div></div><br></br>`
                 }
->>>>>>> 5ca26c811bf33f62588d64571552c8a30ff4d429
             }
 
 
