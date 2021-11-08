@@ -322,6 +322,15 @@
                                     <div class="col-lg-12">
                                         <div id="submitUserInfoButton" style="cursor: pointer;" class="bg-current text-center text-white font-xsss fw-600 p-3 w175 rounded-3 d-inline-block">Save</div>
                                     </div>
+                                    <h4 class="d-inline font-xssss mont-font fw-700">Dark Mode</h4>
+                                    <div class="d-inline float-right mt-1">
+                                        <% if (userRecords.darkMode) { %>
+                                            <label id="darkModeToggle" class="toggle toggle-dark"><input type="checkbox" checked><span class="toggle-icon"></span></label>
+                                        <% } else { %>
+                                            <label id="darkModeToggle" class="toggle toggle-dark"><input type="checkbox"><span class="toggle-icon"></span></label>
+                                        <% } %>
+                                        
+                                    </div>
                                 </div>
 
                             

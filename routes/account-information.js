@@ -76,4 +76,14 @@ router.post("/update-account", (req, res, next) => {
     })
 })
 
+router.get('/darkmodechange', async (req, res) => {
+    let userid = req.session.passport.user;
+    // let userid = 2;
+    let currentSettingRaw = await db.users.findByPk(userid)
+    // console.log(currentSettingRaw.dataValues);
+    let newDarkModeSetting = !currentSettingRaw.dataValues.darkMode;
+    
+    db.users.update({darkMode: newDarkModeSetting}, {where: {id: userid}})
+})
+
 module.exports = router;
