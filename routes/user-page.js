@@ -99,7 +99,7 @@ router.post("/user_posts", (req, res, next) => {
                     languages += "css, "
                 }
                 if(languages == ''){
-                    languages = 'english, '
+                    languages = ''
                 }
                 languages = languages.substring(0, languages.length-2)
                 await db.posts.create({title: fields.title, content: fields.content, languages: languages, userid: userid, imgurl: result.secure_url})

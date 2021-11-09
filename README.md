@@ -123,7 +123,7 @@ router.post("/posts", async (req, res, next) => {
                     languages += "css, "
                 }
                 if(languages == ''){
-                    languages = 'english, '
+                    languages = ''
                 }
                 languages = languages.substring(0, languages.length-2)
                 await db.posts.create({title: fields.title, content: fields.content, languages, userid: userid, imgurl: result.secure_url})
@@ -158,7 +158,7 @@ router.post("/posts", async (req, res, next) => {
     })
 })
 ```
-- Working from someone else's HTML/CSS/CSSS template and making it your own
+- Working from someone else's HTML/CSS/SCSS template and making it your own
 - Figuring out functionality of code for multiple users
 <br>
 
