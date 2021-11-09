@@ -86,16 +86,6 @@ Allow individuals to create an account to connect with other developers to discu
 
 Challenges: 
 - Implementation of cloudinary
-- Working from someone else's HTML/CSS/CSSS template and making it your own
-- Figuring out functionality of code for multiple users
-<br>
-
-Solutions:
-- Reading through documentation and reaching out to outside resources
-- Took the time to filter through their code and made it our own.
-- Taking the time to refactoring the logic for the functionality
-
-
 ```
 // creating new post
 router.post("/posts", async (req, res, next) => {
@@ -168,3 +158,12 @@ router.post("/posts", async (req, res, next) => {
     })
 })
 ```
+- Working from someone else's HTML/CSS/CSSS template and making it your own
+- Figuring out functionality of code for multiple users
+<br>
+
+Solutions:
+- Reading through documentation and reaching out to outside resources
+- Took the time to filter through their code and made it our own.
+- Taking the time to refactoring the logic for the functionality
+
