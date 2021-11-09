@@ -101,9 +101,23 @@ router.post("/user_posts", (req, res, next) => {
                     // next()
                     return
                 }
+                let languages = '';
+                if(fields.javascript){
+                    languages += "javascript, "
+                }
+                if(fields.html){
+                    languages += "html, "
+                }
+                if(fields.css){
+                    languages += "css, "
+                }
+                if(languages == ''){
+                    languages = 'english, '
+                }
+                languages = languages.substring(0, languages.length-2)
                 console.log("reading");
                 console.log(`result.secure_url: ${result.secure_url}`);
-                await db.posts.create({title: fields.title, content: fields.content, languages: "javascript", userid: userid, imgurl: result.secure_url})
+                await db.posts.create({title: fields.title, content: fields.content, languages: languages, userid: userid, imgurl: result.secure_url})
                 console.log("inside cloudinary IF-STATEMENT")
                 
                 res.redirect("/user-page")
@@ -114,22 +128,6 @@ router.post("/user_posts", (req, res, next) => {
             console.log("bottom inside form")
         }
         else if(fields.content !== ""){
-            await db.posts.create({title: fields.title, content: fields.content, languages: "javascript", userid: userid, imgurl: ""})
-
-
-
-
-            
-        await cloudinary.uploader.upload(files.upload.filepath, async (err, result) => {
-            console.log("inside cloudinary")
-            console.log(files.upload.filepath);
-            console.log(`result: ${result}`);
-            console.log(`imgurl: ${result.secure_url}`);
-            if(err){
-                console.log(`An error has occurred inside of cloudinary: ${err}`);
-                next()
-                return
-            }
             let languages = '';
             if(fields.javascript){
                 languages += "javascript, "
@@ -141,14 +139,10 @@ router.post("/user_posts", (req, res, next) => {
                 languages += "css, "
             }
             if(languages == ''){
-                languages = 'english, '
+                languages = ''
             }
             languages = languages.substring(0, languages.length-2)
-            console.log("reading");
-            console.log(`result.secure_url: ${result.secure_url}`);
-            await db.posts.create({title: fields.title, content: fields.content, languages, userid: userid, imgurl: result.secure_url})
-            console.log("inside cloudinary IF-STATEMENT")
-            
+            await db.posts.create({title: fields.title, content: fields.content, languages: languages, userid: userid, imgurl: ""})
             res.redirect("/user-page")
         }
         else{
