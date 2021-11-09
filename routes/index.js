@@ -142,23 +142,8 @@ router.get('/posts', async (req, res) => {
 // creating new post
 router.post("/posts", async (req, res, next) => {
 
-    // //creating post without form/cloudinary
-    console.log('creating post');
-
-    // console.log(req.body);
-
-    // let userid = req.session.passport.user;
-    // // deconstructing from json so all are strings
-    // let {title, content, languages, imgurl} = req.body;
-    // // console.log(req.body)
-    // console.log({title, content, languages, userid, imgurl});
-
-    // await db.posts.create({title, content, languages, userid, imgurl})
-
-
     // creating post with form/cloudinary
     let userid = req.session.passport.user;
-    console.log("*** inside posts post route on backend ***");
     
     // using formidable to grab encrypted data from the form
     const form = new formidable.IncomingForm();
@@ -166,7 +151,6 @@ router.post("/posts", async (req, res, next) => {
     // gives filepath to house temp image file
     let uploadFolder = path.join(__dirname, "../public", "files")
     form.uploadDir = uploadFolder
-    console.log("top test")
     form.parse(req, async (err, fields, files) => {
         if(err){
             console.log(`An error has occurred inside of form.parse(): ${err}`);
@@ -174,24 +158,12 @@ router.post("/posts", async (req, res, next) => {
             return
         }
         // upload image to cloudinary and create post entry in db
-        // console.log(`files: ${files}`);
-        console.log(`fields.javascript: ${typeof fields.javascript}`);
-        // console.log(`fields.html: ${fields.html}`);
-        // console.log(`fields.css: ${fields.css}`);
-        // console.log(`title: ${fields.title}`);
-        // console.log(`content: ${fields.content}`);
-        // console.log(`userid: ${userid}`);
         if(files.upload.size !== 0){
             await cloudinary.uploader.upload(files.upload.filepath, async (err, result) => {
-                console.log("inside cloudinary")
                 if(err){
                     console.log(`An error has occurred inside of cloudinary: ${err}`);
-                    // next()
                     return
                 }
-                console.log("reading");
-                console.log(`result: ${result}`);
-                console.log(`result.secure_url: ${result.secure_url}`);
                 let languages = '';
                 if(fields.javascript){
                     languages += "javascript, "
@@ -207,14 +179,10 @@ router.post("/posts", async (req, res, next) => {
                 }
                 languages = languages.substring(0, languages.length-2)
                 await db.posts.create({title: fields.title, content: fields.content, languages, userid: userid, imgurl: result.secure_url})
-                console.log(`imgurl: ${result.secure_url}`);
-                console.log("inside cloudinary IF-STATEMENT")
                 res.redirect("/")
             })
             // deletes temp image file in files folder
-            console.log("deleting");
             fs.unlinkSync(files.upload.filepath)
-            console.log("bottom inside form")
         }
         else if(fields.content !== ""){
             let languages = '';
@@ -232,31 +200,14 @@ router.post("/posts", async (req, res, next) => {
             }
             languages = languages.substring(0, languages.length-2)
             await db.posts.create({title: fields.title, content: fields.content, languages: languages, userid: userid, imgurl: ""})
+            fs.unlinkSync(files.upload.filepath)
             res.redirect("/")
         }
         else{
-            console.log("content was empty and the post was not created");
+            fs.unlinkSync(files.upload.filepath)
             res.redirect("/")
         }
     })
-    
-    // // grab title, content, languages, userid, imgurl from body parser
-    // let {title, content, languages, userid, imgurl} = req.body
-
-    // if (content){
-        
-    // await db.posts.create({title: title, content: content, languages: "javascript", userid: 1, imgurl: imgurl})
-    // }
-
-    
-    // // grab users posts from database sorted latest first
-    // let userPosts = await db.posts.findAll({
-    //     where: {userid: 1}, 
-    //     order: [
-    //         ["id", "DESC"]
-    //     ]}) // returns an array of objects
-    // res.json(userPosts)
-    console.log("bottom test")
 })
 
 

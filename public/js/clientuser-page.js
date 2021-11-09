@@ -33,7 +33,6 @@ let printPost = async (allPostsData) => {
             usersArray.forEach(usersArrayUser => {
                 if(usersArrayUser.id == post.userid){
                     userImage = usersArrayUser.userimage
-                    
                 }
             });
             let postComments = post.comments;
