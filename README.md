@@ -11,10 +11,10 @@ Doorz is a social media web application where web developers are able to connect
 ![Alt text](public/images/registerP.png)
 <br/>
 
-![Alt text](public/images/home_page.png)
+![Alt text](public/images/homeP.png)
 <br/>
 
-![Alt text](public/images/users_page.png)
+![Alt text](public/images/UsersP.png)
 <br/>
 
 ![Alt text](public/images/account_page.png)
