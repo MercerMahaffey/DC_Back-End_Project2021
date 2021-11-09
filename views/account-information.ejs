@@ -281,20 +281,23 @@
                                     <div class="col-lg-12 mb-3">
                                         <div class="form-group darkText">
                                             <label class="mont-font fw-600 font-xsss">Languages: </label>
+                                            &nbsp;
                                             <% if (userRecords.languages.search('javascript') !== -1) { %>
-                                                <span> Javascript  </span><input type="checkbox" checked="True" name="javascript" id="javascriptCheck"> 
+                                                <span> JavaScript  </span><input type="checkbox" checked="True" name="javascript" id="javascriptCheck"> 
                                             <% } else if (userRecords.languages.search('javascript') == -1){ %>
-                                                <span> Javascript %>  </span><input type="checkbox" name="javascript" id="javascriptCheck">
+                                                <span> JavaScript %>  </span><input type="checkbox" name="javascript" id="javascriptCheck">
                                             <% } %>
+                                            &nbsp;
                                             <% if (userRecords.languages.search('html') !== -1) { %>
-                                                <span> html  </span><input type="checkbox" checked="True" name="html" id="htmlCheck"> 
+                                                <span> HTML  </span><input type="checkbox" checked="True" name="html" id="htmlCheck"> 
                                             <% } else if (userRecords.languages.search('html') == -1){ %>
-                                                <span> html %>  </span><input type="checkbox" name="html" id="htmlCheck">
+                                                <span> HTML %>  </span><input type="checkbox" name="html" id="htmlCheck">
                                             <% } %>
+                                            &nbsp;
                                             <% if (userRecords.languages.search('css') !== -1) { %>
-                                                <span> css  </span><input type="checkbox" checked="True" name="css" id="cssCheck"> 
+                                                <span> CSS  </span><input type="checkbox" checked="True" name="css" id="cssCheck"> 
                                             <% } else if (userRecords.languages.search('css') == -1){ %>
-                                                <span> css %>  </span><input type="checkbox" name="css" id="cssCheck">
+                                                <span> CSS %>  </span><input type="checkbox" name="css" id="cssCheck">
                                             <% } %>
                                         </div>        
                                     </div>
