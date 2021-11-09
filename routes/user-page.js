@@ -67,8 +67,6 @@ router.get("/user_posts", async (req, res) => {
 
 router.post("/user_posts", (req, res, next) => {
     let userid = req.session.passport.user;
-    console.log(`userid = ${req.session.passport.user}`);
-    console.log("*** inside user_posts post route on backend ***");
     
     // using formidable to grab encrypted data from the form
     const form = new formidable.IncomingForm();
@@ -76,25 +74,14 @@ router.post("/user_posts", (req, res, next) => {
     // gives filepath to house temp image file
     let uploadFolder = path.join(__dirname, "../public", "files")
     form.uploadDir = uploadFolder
-    console.log("top test")
     form.parse(req, async (err, fields, files) => {
         if(err){
-            console.log(`An error has occurred inside of form.parse(): ${err}`);
             next()
             return
         }
         // upload image to cloudinary and create post entry in db
-        console.log(`title: ${fields.title}`);
-        console.log(`content: ${fields.content}`);
-        console.log(`userid: ${userid}`);
-        console.log(`files: ${files} below`)
-        console.log(files)
-        console.log(`files.upload.size: ${files.upload.size}`);
         if(files.upload.size !== 0){
-            console.log("inside filepath if-statement");
             await cloudinary.uploader.upload(files.upload.filepath, async (err, result) => {
-                console.log("inside cloudinary")
-                console.log(files.upload.filepath);
                 // console.log(`imgurl: ${result.secure_url}`);
                 if(err){
                     console.log(`An error has occurred inside of cloudinary: ${err}`);
@@ -115,17 +102,12 @@ router.post("/user_posts", (req, res, next) => {
                     languages = 'english, '
                 }
                 languages = languages.substring(0, languages.length-2)
-                console.log("reading");
-                console.log(`result.secure_url: ${result.secure_url}`);
                 await db.posts.create({title: fields.title, content: fields.content, languages: languages, userid: userid, imgurl: result.secure_url})
-                console.log("inside cloudinary IF-STATEMENT")
                 
                 res.redirect("/user-page")
             })
             // deletes temp image file in files folder
-            console.log("deleting temp filepath");
             fs.unlinkSync(files.upload.filepath)
-            console.log("bottom inside form")
         }
         else if(fields.content !== ""){
             let languages = '';
@@ -143,35 +125,14 @@ router.post("/user_posts", (req, res, next) => {
             }
             languages = languages.substring(0, languages.length-2)
             await db.posts.create({title: fields.title, content: fields.content, languages: languages, userid: userid, imgurl: ""})
-            console.log("deleting temp filepath");
             fs.unlinkSync(files.upload.filepath)
             res.redirect("/user-page")
         }
         else{
-            console.log("content was empty and the post was not created");
-            console.log("deleting temp filepath");
             fs.unlinkSync(files.upload.filepath)
             res.redirect("/user-page")
         }
     })
-    
-    // // grab title, content, languages, userid, imgurl from body parser
-    // let {title, content, languages, userid, imgurl} = req.body
-
-    // if (content){
-        
-    // await db.posts.create({title: title, content: content, languages: "javascript", userid: 1, imgurl: imgurl})
-    // }
-
-    
-    // // grab users posts from database sorted latest first
-    // let userPosts = await db.posts.findAll({
-    //     where: {userid: 1}, 
-    //     order: [
-    //         ["id", "DESC"]
-    //     ]}) // returns an array of objects
-    // res.json(userPosts)
-    console.log("bottom test")
 })
 
 module.exports = router;
