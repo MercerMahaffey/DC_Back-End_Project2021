@@ -58,6 +58,10 @@
   padding-left: 65px;
 }
 
+#frameRight:hover{
+  color: blue;
+}
+
 .commentSection{
   display: flex;
   flex-direction: column;
