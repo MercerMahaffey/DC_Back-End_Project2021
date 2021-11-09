@@ -86,6 +86,78 @@ Allow individuals to create an account to connect with other developers to discu
 
 Challenges: 
 - Implementation of cloudinary
+```
+// creating new post
+router.post("/posts", async (req, res, next) => {
+
+    // creating post with form/cloudinary
+    let userid = req.session.passport.user;
+    
+    // using formidable to grab encrypted data from the form
+    const form = new formidable.IncomingForm();
+    
+    // gives filepath to house temp image file
+    let uploadFolder = path.join(__dirname, "../public", "files")
+    form.uploadDir = uploadFolder
+    form.parse(req, async (err, fields, files) => {
+        if(err){
+            console.log(`An error has occurred inside of form.parse(): ${err}`);
+            next()
+            return
+        }
+        // upload image to cloudinary and create post entry in db
+        if(files.upload.size !== 0){
+            await cloudinary.uploader.upload(files.upload.filepath, async (err, result) => {
+                if(err){
+                    console.log(`An error has occurred inside of cloudinary: ${err}`);
+                    return
+                }
+                let languages = '';
+                if(fields.javascript){
+                    languages += "javascript, "
+                }
+                if(fields.html){
+                    languages += "html, "
+                }
+                if(fields.css){
+                    languages += "css, "
+                }
+                if(languages == ''){
+                    languages = 'english, '
+                }
+                languages = languages.substring(0, languages.length-2)
+                await db.posts.create({title: fields.title, content: fields.content, languages, userid: userid, imgurl: result.secure_url})
+                res.redirect("/")
+            })
+            // deletes temp image file in files folder
+            fs.unlinkSync(files.upload.filepath)
+        }
+        else if(fields.content !== ""){
+            let languages = '';
+            if(fields.javascript){
+                languages += "javascript, "
+            }
+            if(fields.html){
+                languages += "html, "
+            }
+            if(fields.css){
+                languages += "css, "
+            }
+            if(languages == ''){
+                languages = ''
+            }
+            languages = languages.substring(0, languages.length-2)
+            await db.posts.create({title: fields.title, content: fields.content, languages: languages, userid: userid, imgurl: ""})
+            fs.unlinkSync(files.upload.filepath)
+            res.redirect("/")
+        }
+        else{
+            fs.unlinkSync(files.upload.filepath)
+            res.redirect("/")
+        }
+    })
+})
+```
 - Working from someone else's HTML/CSS/CSSS template and making it your own
 - Figuring out functionality of code for multiple users
 <br>
@@ -94,3 +166,4 @@ Solutions:
 - Reading through documentation and reaching out to outside resources
 - Took the time to filter through their code and made it our own.
 - Taking the time to refactoring the logic for the functionality
+
