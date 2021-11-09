@@ -5,33 +5,29 @@ Doorz is a social media web application where web developers are able to connect
 
 ## Application screenshots:
 
-![alt text](public/images/login_page.png)
+![Alt text](public/images/login_page.png)
 <br/>
 
-![alt text](public/images/register_page.png)
+![Alt text](public/images/register_page.png)
 <br/>
 
-![alt text](public/images/home_page.png)
+![Alt text](public/images/home_page.png)
 <br/>
 
-![alt text](public/images/users_page.png)
+![Alt text](public/images/users_page.png)
 <br/>
 
-![alt text](public/images/account_page.png)
+![Alt text](public/images/account_page.png)
 <br/>
 
-![alt text](public/images/feed_dark.png)
+![Alt text](public/images/feed_dark.png)
 <br/>
 
-![alt text](public/images/users_dark.png)
+![Alt text](public/images/users_dark.png)
 <br/>
 
-![alt text](public/images/account_dark.png)
+![Alt text](public/images/account_dark.png)
 <br/>
-
-## Code screenshots:
-
-
 
 ## Team:
 
