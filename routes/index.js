@@ -181,17 +181,42 @@ router.post("/posts", async (req, res, next) => {
         // console.log(`title: ${fields.title}`);
         // console.log(`content: ${fields.content}`);
         // console.log(`userid: ${userid}`);
-        await cloudinary.uploader.upload(files.upload.filepath, async (err, result) => {
-            console.log("inside cloudinary")
-            console.log(files.upload.filepath);
-            if(err){
-                console.log(`An error has occurred inside of cloudinary: ${err}`);
-                next()
-                return
-            }
-            console.log("reading");
-            console.log(`result: ${result}`);
-            console.log(`result.secure_url: ${result.secure_url}`);
+        if(files.upload.size !== 0){
+            await cloudinary.uploader.upload(files.upload.filepath, async (err, result) => {
+                console.log("inside cloudinary")
+                if(err){
+                    console.log(`An error has occurred inside of cloudinary: ${err}`);
+                    // next()
+                    return
+                }
+                console.log("reading");
+                console.log(`result: ${result}`);
+                console.log(`result.secure_url: ${result.secure_url}`);
+                let languages = '';
+                if(fields.javascript){
+                    languages += "javascript, "
+                }
+                if(fields.html){
+                    languages += "html, "
+                }
+                if(fields.css){
+                    languages += "css, "
+                }
+                if(languages == ''){
+                    languages = 'english, '
+                }
+                languages = languages.substring(0, languages.length-2)
+                await db.posts.create({title: fields.title, content: fields.content, languages, userid: userid, imgurl: result.secure_url})
+                console.log(`imgurl: ${result.secure_url}`);
+                console.log("inside cloudinary IF-STATEMENT")
+                res.redirect("/")
+            })
+            // deletes temp image file in files folder
+            console.log("deleting");
+            fs.unlinkSync(files.upload.filepath)
+            console.log("bottom inside form")
+        }
+        else if(fields.content !== ""){
             let languages = '';
             if(fields.javascript){
                 languages += "javascript, "
@@ -203,18 +228,16 @@ router.post("/posts", async (req, res, next) => {
                 languages += "css, "
             }
             if(languages == ''){
-                languages = 'english, '
+                languages = ''
             }
             languages = languages.substring(0, languages.length-2)
-            await db.posts.create({title: fields.title, content: fields.content, languages, userid: userid, imgurl: result.secure_url})
-            console.log(`imgurl: ${result.secure_url}`);
-            console.log("inside cloudinary IF-STATEMENT")
+            await db.posts.create({title: fields.title, content: fields.content, languages: languages, userid: userid, imgurl: ""})
             res.redirect("/")
-        })
-        // deletes temp image file in files folder
-        console.log("deleting");
-        fs.unlinkSync(files.upload.filepath)
-        console.log("bottom inside form")
+        }
+        else{
+            console.log("content was empty and the post was not created");
+            res.redirect("/")
+        }
     })
     
     // // grab title, content, languages, userid, imgurl from body parser

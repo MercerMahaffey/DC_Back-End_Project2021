@@ -13,9 +13,12 @@
 #uploadProfilePhoto:hover{
     cursor:pointer
 }
-/* 
-input[type="file"] {
-    display: none;
-} */
 
+#cssFrameworks, #javascriptFrameworks, #mySQLFrameworks{
+    margin-left: 16px;
+}
+
+#cssFrameworks, #javascriptFrameworks, #mySQLFrameworks:hover{
+    cursor: default;
+}
 
