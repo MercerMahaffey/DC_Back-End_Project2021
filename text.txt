@@ -1,0 +1,106 @@
+
+
+file: stack.js 
+
+class Stack{
+    constructor() {
+        this.data = []
+    }
+
+    pop(){
+        return this.data.pop();
+    }
+
+    push(val){
+        this.data.push(val)
+    }
+
+    peek(){
+        return this.data[this.data.length - 1]
+    }
+
+    length(){
+        return this.data.length;
+    }
+}
+
+module.export = Stack;
+
+files: app.js
+
+// use thse stack 
+
+let Stack = require('./Stack')
+
+let newStack = new Stack();
+
+newStack.push(3);
+
+
+
+// design blog 
+
+
+dogs 
+cats 
+
+
+
+1. categories 
+2. blogs 
+3. comments 
+
+
+categories
+id (pk)
+catTitle
+
+users
+id (pk)
+name
+email
+
+
+blogs
+id (pk)
+description
+author REFRENCE users id
+
+comments
+id (pk)
+userid (fk) REFRENCE users id
+blog id (fk) REFRENCE blog id
+
+
+
+// cat/ cats/ cating
+
+//localhost:3000/cat 
+//localhost:3000/cats
+
+//. _?
+
+
+
+app.get('/cat(ing)?', (req, res) => {
+
+    res.send('hello world')
+})
+
+
+
+// localhost:3000/stephen
+
+//body. session
+
+app.get('/:name', (req, res) => {
+  let name = req.params.name
+  req.session.name = name
+})
+
+app.get('/data', (req, res) => {
+
+    console.log(stenhen)
+    res.send(req.session.name)
+})
+
