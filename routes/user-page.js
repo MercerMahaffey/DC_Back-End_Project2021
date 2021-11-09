@@ -123,7 +123,7 @@ router.post("/user_posts", (req, res, next) => {
                 res.redirect("/user-page")
             })
             // deletes temp image file in files folder
-            console.log("deleting");
+            console.log("deleting temp filepath");
             fs.unlinkSync(files.upload.filepath)
             console.log("bottom inside form")
         }
@@ -143,10 +143,14 @@ router.post("/user_posts", (req, res, next) => {
             }
             languages = languages.substring(0, languages.length-2)
             await db.posts.create({title: fields.title, content: fields.content, languages: languages, userid: userid, imgurl: ""})
+            console.log("deleting temp filepath");
+            fs.unlinkSync(files.upload.filepath)
             res.redirect("/user-page")
         }
         else{
             console.log("content was empty and the post was not created");
+            console.log("deleting temp filepath");
+            fs.unlinkSync(files.upload.filepath)
             res.redirect("/user-page")
         }
     })
