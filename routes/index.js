@@ -81,7 +81,7 @@ router.get('/logout', (req, res) => {
 let grabPosts = async () => {
     let postRecords = await db.users.findAll(
         {include: [{
-            model:db.posts,
+            model: db.posts,
             required: true,
             include: [{
                 model: db.comments,
