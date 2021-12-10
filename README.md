@@ -3,6 +3,11 @@
 ## Overview:
 Doorz is a social media web application where web developers are able to connect and discuss their coding journey and challenges that each developer face.
 
+** * **
+
+Hosted Link: http://ec2-3-144-44-170.us-east-2.compute.amazonaws.com/
+** * **
+
 ## Application screenshots:
 
 ![Alt text](public/images/loginP.png)
